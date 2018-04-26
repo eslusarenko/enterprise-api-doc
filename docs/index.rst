@@ -69,10 +69,15 @@ loginEnterprise
 Request
 ::
 
-	string dp_command 			Command name 'loginEnterprise'
-	string dp_apikey 				API key
-	string dp_login_user 			Application user login
-	string dp_login_password		Application user password
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_command        | Command name 'loginEnterprise'                                |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_apikey         | API key                                                       |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_login_user     | Application user login                                        |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_login_password | Application user password                                     |
++---------+-------------------+---------------------------------------------------------------+
 
 Response
 ::
@@ -148,8 +153,8 @@ Required at least one of 'dp_search_query', 'dp_search_categories', 'dp_search_u
 +---------+-----------------+-------------------------------------------------------------------------------------------------------------+
 | int     | dp_search_sort  | Optional. Default is 4. Definition of the sort type                                                         |
 |         |                 | (number from 1 to 6, each number equals sort type).                                                         |
-|         |                 | In fact, 2nd an 3rd search type are equal 4th now 														  |
-|         |                 | ("best_sales"). So you should use 1, 4, 5 and 6 sort type.												  |
+|         |                 | In fact, 2nd an 3rd search type are equal 4th now                                                           |
+|         |                 | ("best_sales"). So you should use 1, 4, 5 and 6 sort type.                                                  |
 |         |                 | - 1 is for 'best_match'                                                                                     |
 |         |                 | - 4 is for 'best_sales'                                                                                     |
 |         |                 | - 5 is for 'newest'                                                                                         |
