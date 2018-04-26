@@ -43,16 +43,16 @@ Enterprise API включает функции для поиска файлов 
 "type" - «успех» для успешных запросов, «ошибка», если возникают некоторые ошибки
 ::
 
-"error": {
-	"errorcode": код ошибки
-	"errormsg": сообщение об ошибке
-	"exception": тип ошибки
-}
+	"error": {
+		"errorcode": код ошибки
+		"errormsg": сообщение об ошибке
+		"exception": тип ошибки
+	}
 
 **Примечания к параметрам для методов API**
 
 bool: будет считаться TRUE для «1», «true», «on» и «yes». FALSE в противном случае.
-массив: стандартный массив http-запроса (например, ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``).
+массив: стандартный массив http-запроса. Например: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
 
 Аутентификация пользователя
 ===========================
@@ -69,10 +69,10 @@ loginEnterprise
 Request
 ::
 
-	param string dp_command 			Command name 'loginEnterprise'
-	param string dp_apikey 				API key
-	param string dp_login_user 			Application user login
-	param string dp_login_password 		Application user password
+	string dp_command 			Command name 'loginEnterprise'
+	string dp_apikey 				API key
+	string dp_login_user 			Application user login
+	string dp_login_password		Application user password
 
 Response
 ::
@@ -97,19 +97,19 @@ logout
 Request
 ::
 
-param string dp_command    		Command name 'logout'
-param string dp_apikey 			API key
-param string dp_session_id 		Session ID
+	string dp_command    		Command name 'logout'
+	string dp_apikey 			API key
+	string dp_session_id 		Session ID
 
 Response
 ::
 
-{
-	timestamp: "2013-03-13 06:49:19",
-version: "1.3",
-	type: "success",
-	apiKey: "0cbc785ec3776c276bf2f"
- }
+	{
+		timestamp: "2013-03-13 06:49:19",
+		version: "1.3",
+		type: "success",
+		apiKey: "0cbc785ec3776c276bf2f"
+	}
 
 Работа с группами пользователей
 ===============================
@@ -129,74 +129,92 @@ version: "1.3",
  
 search
 ~~~~~~
+
 Поиск файлов
 Метод предназначен для поиска файлов по заданным параметрам.
 
 Required at least one of 'dp_search_query', 'dp_search_categories', 'dp_search_user', 'dp_search_username' parameters.
 
++---------+-----------------+-------------------------------------------------------------------------------------------------------------+
+| string  | dp_apikey       | Client API key                                                                                              |
++---------+-----------------+-------------------------------------------------------------------------------------------------------------+
+| string  | dp_command      | Command name 'search'                                                                                       |
++---------+-----------------+-------------------------------------------------------------------------------------------------------------+
+| string  | dp_domain       | Optional. Default is "depositphotos.com". Domain name of one of CDN servers available (e.g. imgcontent.net) |
++---------+-----------------+-------------------------------------------------------------------------------------------------------------+
+| string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are looking for                                 |
++---------+-----------------+-------------------------------------------------------------------------------------------------------------+
+| int     | dp_search_sort  | Optional. Default is 4. Definition of the sort type (number from 1 to 6, each number equals sort type).     |
+|         |                 | In fact, 2nd an 3rd search type are equal 4th now ("best_sales"). So you should use 1, 4, 5 and 6 sort type.|
+|         |                 | * 1 is for 'best_match'                                                                                     |
+|         |                 | * 4 is for 'best_sales'                                                                                     |
+|         |                 | * 5 is for 'newest'                                                                                         |
+|         |                 | * 6 is for 'undiscovered'                                                                                   |
++---------+-----------------+-------------------------------------------------------------------------------------------------------------+
+
 Request
 ::
 
-param string dp_apikey 	Client API key
-param string dp_command 	Command name 'search'
-param string dp_domain 	Optional. Default is "depositphotos.com". Domain name of one of CDN servers available (e.g. imgcontent.net)
-param string dp_search_query 	A phrase in English, e.g. "woman hands" OR item id which we are looking for
-param  int dp_search_sort 	Optional. Default is 4. Definition of the sort type (number from 1 to 6, each number equals sort type). In fact, 2nd an 3rd search type are equal 4th now ("best_sales"). So you should use 1, 4, 5 and 6 sort type.
-# 1 is for 'best_match'
-# 4 is for 'best_sales'
-# 5 is for 'newest'
-# 6 is for 'undiscovered'
+	string dp_apikey 	Client API key
+	string dp_command 	Command name 'search'
+	string dp_domain 	Optional. Default is "depositphotos.com". Domain name of one of CDN servers available (e.g. imgcontent.net)
+	string dp_search_query 	A phrase in English, e.g. "woman hands" OR item id which we are looking for
+	 int dp_search_sort 	Optional. Default is 4. Definition of the sort type (number from 1 to 6, each number equals sort type). In fact, 2nd an 3rd search type are equal 4th now ("best_sales"). So you should use 1, 4, 5 and 6 sort type.
+	# 1 is for 'best_match'
+	# 4 is for 'best_sales'
+	# 5 is for 'newest'
+	# 6 is for 'undiscovered'
 
-param int dp_search_limit 	Optional. Default is 100. A limit to the number of returned search results
-param string dp_search_offset 	Optional. Default is 0. An offset for the first result to return, after sorting the found set.
-param string dp_search_categories	Optional. Space-delimited list of category identifiers to search for (e.g. '34 35 23')
-param int dp_search_color 	Optional. Search by the dominant color of the image. List of colors:
-# 0 - any
-# 1 - blue, #00007c
-# 2 - blue, #0005fd
-# 3 - blue, #01ffff
-# 4 - green, #027f00
-# 5 - green, #04fe00
-# 6 - yellow, #ffff00
-# 7 - orange, #f9be00
-# 8 - orange, #fecd9b
-# 9 - red, #fe0000
-# 10 - red, #7e0004
-# 11 - brown, #653201
-# 12 - violet, #ff01ff
-# 13 - violet, #810081
-# 14 - grey, #bfbfbf
-# 15 - grey, #7a7a7a
-# 16 - black, #000000
-# 17 - white, #ffffff
-param bool dp_search_nudity 	Optional. Default is 0. If false, any search results containing nudity will be hidden, otherwise all images.
-param int dp_search_user 	Optional. Search by the author, using an author identifier (e.g. 1000942)
-param string dp_search_username 	Optional. Search by username of DepositPhotos user
-param string dp_search_orientation 	Optional. Search by the image orientation. [ 'horizontal' | 'vertical' | 'square' ]
-param string dp_search_imagesize 	Optional. Search by the image size. Sets minimum image size. [ 's' | 'm' | 'l' | 'xl' ]
-param string $dp_exclude_keyword 	Optional. Comma-separated words to exclude.
-param bool dp_search_photo 	Optional. Default is true. If true, the search results will include JPEG images. If false - exclude.
-param bool dp_search_vector 	Optional. Default is true . If true, the search results will include vector images. If false - exclude.
-param bool dp_search_video 	Optional. Default is false. If true, the search results will include videos. If false - exclude.
-param bool dp_search_editorial 	Optional. If true, the searh results will include only editorial items. If false - exclude. If not passed, this filter won't be applied.
-param string dp_tracking_url 	Optional. Affiliate tracking link.
-param bool dp_full_info 	Optional. Default is false. Return full info about items.
-param string dp_watermark 	Optional. Watermark to use: depositphotos | neutral. Default is neutral.
-param string dp_translate_items 	Optional. Default is false. If true - title, description and categories will be translated (if translation exists) to language dp_lang
-param string dp_lang 	Optional. Default is 'en'. Language for translation (de, ru, fr, sp, zh (for chinese) etc.)
-param bool dp_search_correction 	Optional. Default is '1'. Enable auto correction of search phrase.
-param int dp_search_height 	Optional. Minimum image height with units in dp_search_dimension_units.
-param int dp_search_width 	Optional. Minimum image width with units in dp_search_dimension_units.
-param int dp_search_max_height 	Optional. Maximum image height with units in dp_search_dimension_units.
-param int dp_search_max_width 	Optional. Maximum image width with units in dp_search_dimension_units.
-param string dp_search_dimension_units 	Optional. Default = 'px'. Units for min and max image search size. Px to inc treats as 300 DPI. [ 'px' | 'inch' | 'cm' ]
-param string dp_image_url 	Optional. Search by image.
-param string dp_search_gender 	Optional. People gender [ 'male' | 'female' | 'both' ]
-param bool dp_search_people_only 	Optional. Only people must be present
-param str|int dp_search_age 	Optional. People age [ 'infant' | 'child' | 'teenager' | '20' | '30' | '40' | '50' | '60' | '70' ]
-param string dp_search_race 	Optional. People race [ 'asian' | 'brazilian' | 'black' | 'caucasian' | 'hispanic' | 'middle' | 'multi' | 'native' | 'other' ]
-param int dp_search_quantity 	Optional. People quantity in the image. Means 'any' if greater than 3. [ 1 | 2 | 3 ]
-param string dp_item_permission 	Optional. Search some special type of files. [ "regular" - All files (default) | "enterprise" - Curated Collection (For ES users only)  | "premium" - Focused Collection (For ES users only) )
+	int dp_search_limit 	Optional. Default is 100. A limit to the number of returned search results
+	string dp_search_offset 	Optional. Default is 0. An offset for the first result to return, after sorting the found set.
+	string dp_search_categories	Optional. Space-delimited list of category identifiers to search for (e.g. '34 35 23')
+	int dp_search_color 	Optional. Search by the dominant color of the image. List of colors:
+	# 0 - any
+	# 1 - blue, #00007c
+	# 2 - blue, #0005fd
+	# 3 - blue, #01ffff
+	# 4 - green, #027f00
+	# 5 - green, #04fe00
+	# 6 - yellow, #ffff00
+	# 7 - orange, #f9be00
+	# 8 - orange, #fecd9b
+	# 9 - red, #fe0000
+	# 10 - red, #7e0004
+	# 11 - brown, #653201
+	# 12 - violet, #ff01ff
+	# 13 - violet, #810081
+	# 14 - grey, #bfbfbf
+	# 15 - grey, #7a7a7a
+	# 16 - black, #000000
+	# 17 - white, #ffffff
+	bool dp_search_nudity 	Optional. Default is 0. If false, any search results containing nudity will be hidden, otherwise all images.
+	int dp_search_user 	Optional. Search by the author, using an author identifier (e.g. 1000942)
+	string dp_search_username 	Optional. Search by username of DepositPhotos user
+	string dp_search_orientation 	Optional. Search by the image orientation. [ 'horizontal' | 'vertical' | 'square' ]
+	string dp_search_imagesize 	Optional. Search by the image size. Sets minimum image size. [ 's' | 'm' | 'l' | 'xl' ]
+	string $dp_exclude_keyword 	Optional. Comma-separated words to exclude.
+	bool dp_search_photo 	Optional. Default is true. If true, the search results will include JPEG images. If false - exclude.
+	bool dp_search_vector 	Optional. Default is true . If true, the search results will include vector images. If false - exclude.
+	bool dp_search_video 	Optional. Default is false. If true, the search results will include videos. If false - exclude.
+	bool dp_search_editorial 	Optional. If true, the searh results will include only editorial items. If false - exclude. If not passed, this filter won't be applied.
+	string dp_tracking_url 	Optional. Affiliate tracking link.
+	bool dp_full_info 	Optional. Default is false. Return full info about items.
+	string dp_watermark 	Optional. Watermark to use: depositphotos | neutral. Default is neutral.
+	string dp_translate_items 	Optional. Default is false. If true - title, description and categories will be translated (if translation exists) to language dp_lang
+	string dp_lang 	Optional. Default is 'en'. Language for translation (de, ru, fr, sp, zh (for chinese) etc.)
+	bool dp_search_correction 	Optional. Default is '1'. Enable auto correction of search phrase.
+	int dp_search_height 	Optional. Minimum image height with units in dp_search_dimension_units.
+	int dp_search_width 	Optional. Minimum image width with units in dp_search_dimension_units.
+	int dp_search_max_height 	Optional. Maximum image height with units in dp_search_dimension_units.
+	int dp_search_max_width 	Optional. Maximum image width with units in dp_search_dimension_units.
+	string dp_search_dimension_units 	Optional. Default = 'px'. Units for min and max image search size. Px to inc treats as 300 DPI. [ 'px' | 'inch' | 'cm' ]
+	string dp_image_url 	Optional. Search by image.
+	string dp_search_gender 	Optional. People gender [ 'male' | 'female' | 'both' ]
+	bool dp_search_people_only 	Optional. Only people must be present
+	str|int dp_search_age 	Optional. People age [ 'infant' | 'child' | 'teenager' | '20' | '30' | '40' | '50' | '60' | '70' ]
+	string dp_search_race 	Optional. People race [ 'asian' | 'brazilian' | 'black' | 'caucasian' | 'hispanic' | 'middle' | 'multi' | 'native' | 'other' ]
+	int dp_search_quantity 	Optional. People quantity in the image. Means 'any' if greater than 3. [ 1 | 2 | 3 ]
+	string dp_item_permission 	Optional. Search some special type of files. [ "regular" - All files (default) | "enterprise" - Curated Collection (For ES users only)  | "premium" - Focused Collection (For ES users only) )
 
 Response
 ::
@@ -272,11 +290,11 @@ complimentaryDownload
 Request
 ::
 
-param string  dp_command 		Command name 'complimentaryDownload'
-param string  dp_apikey  		API key
-param string  dp_session_id  	Session ID
-param int dp_item_id  		The identifier of the item
-param int dp_option   		The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ... ]
+string  dp_command 		Command name 'complimentaryDownload'
+string  dp_apikey  		API key
+string  dp_session_id  	Session ID
+int dp_item_id  		The identifier of the item
+int dp_option   		The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ... ]
 
 dp_option для основной коллекции: "s-2015", "m-2015", "l-2015", "xl-2015", "vect"
 dp_option для премиальной коллекции: "cs", "сl", "xl-2015"
@@ -303,15 +321,15 @@ getGroupCompDownloads
 Request
 ::
 
-param string dp_command 		Command name 'getGroupCompDownloads'
-param string dp_apikey 		API key
-param string dp_session_id 	Session key
-param string dp_date_start 	Start date when items were licensed
-param string dp_date_end 		End date when items were licensed 
-param string dp_user_id 		id of user licensed item
-param int dp_limit
-param int dp_offset
-param string|array dp_type 	image/vector/video
+string dp_command 		Command name 'getGroupCompDownloads'
+string dp_apikey 		API key
+string dp_session_id 	Session key
+string dp_date_start 	Start date when items were licensed
+string dp_date_end 		End date when items were licensed 
+string dp_user_id 		id of user licensed item
+int dp_limit
+int dp_offset
+string|array dp_type 	image/vector/video
 
 Response
 ::
