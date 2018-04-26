@@ -190,6 +190,15 @@ Request
 
 
 
+Request
+------------
+
+	string dp_command    		Command name 'logout'
+	string dp_apikey 			API key
+	string dp_session_id 		Session ID
+
+
+
 
 Option Lists
 ------------
@@ -205,7 +214,7 @@ For listing command-line options:
 
 --very-long-option
               The description can also start on the next line.
-              
+
               The description may contain multiple body elements,
               regardless of where it starts.
 
