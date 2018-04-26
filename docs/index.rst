@@ -146,10 +146,10 @@ Request
 +---------+-----------------+--------------------------------------------------------------------+
 | string  | dp_command      | Command name 'search'                                              |
 +---------+-----------------+--------------------------------------------------------------------+
-| string  | dp_domain       | Optional. Default is "depositphotos.com". Domain name of           |
-|         |                 | |one of CDN servers available (e.g. imgcontent.net)                |
+| string  | dp_domain       | | Optional. Default is "depositphotos.com". Domain name of         |
+|         |                 | | one of CDN servers available (e.g. imgcontent.net)               |
 +---------+-----------------+--------------------------------------------------------------------+
-| string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are    |
+| string  | dp_search_query | | A phrase in English, e.g. "woman hands" OR item id which we are  |
 |         |                 | | looking for                                                      |
 +---------+-----------------+-----------------------------------------+--------------------------+
 | int     | dp_search_sort  | | Optional. Default is 4.               | - 1 is for 'best_match'  |
