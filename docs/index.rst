@@ -192,6 +192,24 @@ Request
 
 
 
+Request
+
+:widths: 10 15 45
+:header-rows: 0
+:stub-columns: 0
+
+* - string
+  - dp_command 
+  - Command name 'complimentaryDownload'
+* - string
+  - dp_apikey 
+  - API key
+* - string
+  - dp_command 
+  - Command name 'complimentaryDownload'
+* - string
+  - dp_apikey 
+  - API key
 
 
 
