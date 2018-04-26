@@ -8,6 +8,7 @@ Depositphotos Enterprise Solution API
 
 Введение
 ========
+
 В этом руководстве описывается использование API для работы с файлами Depositphotos. Это руководство предназначено для разработчиков, знакомых с технологиями передачи данных HTTP, JSON, и имеющих базовые знания программирования на любом языке программирования.
 
 API - это интерфейс доступа к приложению, который позволяет зарегистрированным клиентам работать с контентом и лицензиями Depositphotos. 
@@ -18,6 +19,7 @@ Enterprise API включает функции для поиска файлов 
 
 Главная информация
 ------------------
+
 Регистрация
 Чтобы стать партнером Depositphotos, вам необходима учетная запись Enterprise на Depositphotos и ключ доступа к Enterprise API (его можно получить у менеджера). 
 
@@ -25,6 +27,7 @@ Enterprise API включает функции для поиска файлов 
 
 Общие принципы
 --------------
+
 Все вызовы API выполняются через HTTP-протокол с набором параметров GET или POST. Ответ API возвращает в формат JSON.
 
 **Для всех методов API есть два обязательных параметра**
@@ -66,6 +69,7 @@ loginEnterprise
 
 Аутентификация пользователя по логину, паролю и API-ключу. Возвращает уникальный идентификатор сеанса.
 
+
 Request
 
 +---------+-------------------+---------------------------------------------------------------+
@@ -78,6 +82,9 @@ Request
 | string  | dp_login_password | Application user password                                     |
 +---------+-------------------+---------------------------------------------------------------+
 
+
+
+	
 Response
 ::
 
@@ -99,20 +106,23 @@ logout
 Завершение работы (закрыть API-сессию)
 
 Request
-::
 
-	string dp_command    		Command name 'logout'
-	string dp_apikey 			API key
-	string dp_session_id 		Session ID
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_command        | Command name 'logout'                                         |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_apikey         | API key                                                       |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_session_id     | Session ID                                                    |
++---------+-------------------+---------------------------------------------------------------+
 
 Response
 ::
 
 	{
-		timestamp: "2013-03-13 06:49:19",
-		version: "1.3",
-		type: "success",
-		apiKey: "0cbc785ec3776c276bf2f"
+		"timestamp": "2013-03-13 06:49:19",
+		"version": "1.3",
+		"type": "success",
+		"apiKey": "0cbc785ec3776c276bf2f"
 	}
 
 Работа с группами пользователей
@@ -141,91 +151,169 @@ Required at least one of 'dp_search_query', 'dp_search_categories', 'dp_search_u
 
 Request
 
-+---------+-----------------+-------------------------------------------------------------------+
-| string  | dp_apikey       || Client API key                                                   |
-+---------+-----------------+-------------------------------------------------------------------+
-| string  | dp_command      || Command name 'search'                                            |
-+---------+-----------------+-------------------------------------------------------------------+
-| string  | dp_domain       || Optional. Default is "depositphotos.com". Domain name of         |
-|         |                 || one of CDN servers available (e.g. imgcontent.net)               |
-+---------+-----------------+-------------------------------------------------------------------+
-| string  | dp_search_query || A phrase in English, e.g. "woman hands" OR item id which we are  |
-|         |                 || looking for                                                      |
-+---------+-----------------+----------------------------------------+--------------------------+
-| int     | dp_search_sort  || Optional. Default is 4.               | - 1 is for 'best_match'  |
-|         |                 || Definition of the sort type           | - 4 is for 'best_sales'  |
-|         |                 || (number from 1 to 6, each number      | - 5 is for 'newest'      |
-|         |                 || equals sort type). In fact,           | - 6 is for 'undiscovered'|
-|         |                 || 2nd and 3rd search type are           |                          |
-|         |                 || equal 4th now ("best_sales").         |                          |
-|         |                 || So you should use                     |                          |
-|         |                 || 1, 4, 5 and 6 sort type.              |                          |
-+---------+-----------------+----------------------------------------+--------------------------+
-
-
-Request
-::
-
-	string dp_apikey 	Client API key
-	string dp_command 	Command name 'search'
-	string dp_domain 	Optional. Default is "depositphotos.com". Domain name of one of CDN servers available (e.g. imgcontent.net)
-	string dp_search_query 	A phrase in English, e.g. "woman hands" OR item id which we are looking for
-	 int dp_search_sort 	Optional. Default is 4. Definition of the sort type (number from 1 to 6, each number equals sort type). In fact, 2nd an 3rd search type are equal 4th now ("best_sales"). So you should use 1, 4, 5 and 6 sort type.
-	# 1 is for 'best_match'
-	# 4 is for 'best_sales'
-	# 5 is for 'newest'
-	# 6 is for 'undiscovered'
-
-	int dp_search_limit 	Optional. Default is 100. A limit to the number of returned search results
-	string dp_search_offset 	Optional. Default is 0. An offset for the first result to return, after sorting the found set.
-	string dp_search_categories	Optional. Space-delimited list of category identifiers to search for (e.g. '34 35 23')
-	int dp_search_color 	Optional. Search by the dominant color of the image. List of colors:
-	# 0 - any
-	# 1 - blue, #00007c
-	# 2 - blue, #0005fd
-	# 3 - blue, #01ffff
-	# 4 - green, #027f00
-	# 5 - green, #04fe00
-	# 6 - yellow, #ffff00
-	# 7 - orange, #f9be00
-	# 8 - orange, #fecd9b
-	# 9 - red, #fe0000
-	# 10 - red, #7e0004
-	# 11 - brown, #653201
-	# 12 - violet, #ff01ff
-	# 13 - violet, #810081
-	# 14 - grey, #bfbfbf
-	# 15 - grey, #7a7a7a
-	# 16 - black, #000000
-	# 17 - white, #ffffff
-	bool dp_search_nudity 	Optional. Default is 0. If false, any search results containing nudity will be hidden, otherwise all images.
-	int dp_search_user 	Optional. Search by the author, using an author identifier (e.g. 1000942)
-	string dp_search_username 	Optional. Search by username of DepositPhotos user
-	string dp_search_orientation 	Optional. Search by the image orientation. [ 'horizontal' | 'vertical' | 'square' ]
-	string dp_search_imagesize 	Optional. Search by the image size. Sets minimum image size. [ 's' | 'm' | 'l' | 'xl' ]
-	string $dp_exclude_keyword 	Optional. Comma-separated words to exclude.
-	bool dp_search_photo 	Optional. Default is true. If true, the search results will include JPEG images. If false - exclude.
-	bool dp_search_vector 	Optional. Default is true . If true, the search results will include vector images. If false - exclude.
-	bool dp_search_video 	Optional. Default is false. If true, the search results will include videos. If false - exclude.
-	bool dp_search_editorial 	Optional. If true, the searh results will include only editorial items. If false - exclude. If not passed, this filter won't be applied.
-	string dp_tracking_url 	Optional. Affiliate tracking link.
-	bool dp_full_info 	Optional. Default is false. Return full info about items.
-	string dp_watermark 	Optional. Watermark to use: depositphotos | neutral. Default is neutral.
-	string dp_translate_items 	Optional. Default is false. If true - title, description and categories will be translated (if translation exists) to language dp_lang
-	string dp_lang 	Optional. Default is 'en'. Language for translation (de, ru, fr, sp, zh (for chinese) etc.)
-	bool dp_search_correction 	Optional. Default is '1'. Enable auto correction of search phrase.
-	int dp_search_height 	Optional. Minimum image height with units in dp_search_dimension_units.
-	int dp_search_width 	Optional. Minimum image width with units in dp_search_dimension_units.
-	int dp_search_max_height 	Optional. Maximum image height with units in dp_search_dimension_units.
-	int dp_search_max_width 	Optional. Maximum image width with units in dp_search_dimension_units.
-	string dp_search_dimension_units 	Optional. Default = 'px'. Units for min and max image search size. Px to inc treats as 300 DPI. [ 'px' | 'inch' | 'cm' ]
-	string dp_image_url 	Optional. Search by image.
-	string dp_search_gender 	Optional. People gender [ 'male' | 'female' | 'both' ]
-	bool dp_search_people_only 	Optional. Only people must be present
-	str|int dp_search_age 	Optional. People age [ 'infant' | 'child' | 'teenager' | '20' | '30' | '40' | '50' | '60' | '70' ]
-	string dp_search_race 	Optional. People race [ 'asian' | 'brazilian' | 'black' | 'caucasian' | 'hispanic' | 'middle' | 'multi' | 'native' | 'other' ]
-	int dp_search_quantity 	Optional. People quantity in the image. Means 'any' if greater than 3. [ 1 | 2 | 3 ]
-	string dp_item_permission 	Optional. Search some special type of files. [ "regular" - All files (default) | "enterprise" - Curated Collection (For ES users only)  | "premium" - Focused Collection (For ES users only) )
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_apikey                 || Client API key                                         |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_command                || Command name 'search'                                  |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_domain                 || Optional. Default is "depositphotos.com". Domain name  |
+|         |                           || ofone of CDN servers available (e.g. imgcontent.net)   |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_query           || A phrase in English, e.g. "woman hands" OR item id     |
+|         |                           || which we arelooking for                                |
++---------+---------------------------+------------------------------+--------------------------+
+| int     | dp_search_sort            || Optional. Default is 4.     | - 1 is for 'best_match'  |
+|         |                           || Definition of the sort type | - 4 is for 'best_sales'  |
+|         |                           || (number from 1 to 6, each   | - 5 is for 'newest'      |
+|         |                           || number equals tp sort type) | - 6 is for 'undiscovered'|
++---------+---------------------------+----------------------------------------+----------------+
+| int     | dp_search_limit           || Optional. Default is 100. A limit to the number of     |
+|         |                           || returned search results                                |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_offset          || Optional. Default is 0. An offset for the first result |
+|         |                           || to return, after sorting the found set.                |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_categories      || Optional. Space-delimited list of category identifiers |
+|         |                           || to search for (e.g. '34 35 23')                        |
+| int     | dp_search_color           || Optional. Search by the dominant color of the image.   |
++---------+---------------------------+--------------------------------+----+---------+---------+
+|         |                           || List of colors                | 0  | any     |         |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 1  | blue    | #00007c |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 2  | blue    | #0005fd |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 3  | blue    | #01ffff |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 4  | green   | #027f00 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 5  | green   | #04fe00 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 6  | yellow  | #ffff00 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 7  | orange  | #f9be00 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 8  | orange  | #fecd9b |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 9  | red     | #fe0000 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 10 | red     | #7e0004 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 11 | brown   | #653201 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 12 | violet  | #ff01ff |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 13 | violet  | #810081 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 14 | grey    | #bfbfbf |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 15 | grey    | #7a7a7a |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 16 | black   | #000000 |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                               | 17 | white   | #ffffff |
+|         |                           ||                               +----+---------+---------+
+|         |                           ||                                                        |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_nudity          || Optional. Default is 0. If false, any search results   |
+|         |                           || containing nudity will be hidden, otherwise all images.|
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_user            || Optional. Search by the author, using an author        |
+|         |                           || identifier (e.g. 1000942)                              |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_username        || Optional. Search by username of DepositPhotos user     |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_nudity          || Optional. Default is 0. If false, any search results   |
+|         |                           || containing nudity will be hidden, otherwise all images.|
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_user            || Optional. Search by the author, using an author        |
+|         |                           || identifier (e.g. 1000942)                              |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_username        || Optional. Search by username of DepositPhotos user     |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_orientation     || Optional. Search by the image orientation.             |
+|         |                           || 'horizontal' or 'vertical' or 'square'                 |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_imagesize       || Optional. Search by the image size. Sets minimum image |
+|         |                           || size. 's' or 'm' or 'l' or 'xl'                        |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_exclude_keyword        || Optional. Comma-separated words to exclude.            |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_photo           || Optional. Default is true. If true, the search results |
+|         |                           || will include JPEG images. If false - exclude.          |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_vector          || Optional. Default is true . If true, the search results|
+|         |                           || will include vector images. If false - exclude.        |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_video           || Optional. Default is false. If true, the search results|
+|         |                           || will include videos. If false - exclude.               |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_editorial       || Optional. If true, the searh results will include only |
+|         |                           || editorial items. If false - exclude. If not passed,    |
+|         |                           || this filter won't be applied.                          |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_tracking_url           || Optional. Affiliate tracking link.                     |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_full_info              || Optional. Default is false. Return full info about     |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_full_info              || items.                                                 |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_watermark              || Optional. Watermark to use: depositphotos or neutral.  |
+|         |                           || Default is neutral.                                    |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_translate_items        || Optional. Default is false. If true: title, description|
+|         |                           || and categories will be translated (if translation      |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_full_info              || exists)                                                |
+|         |                           || to language dp_lang                                    |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_lang                   || Optional. Default is 'en'. Language for translation    |
+|         |                           || (de, ru, fr, sp, zh (for chinese) etc.)                |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_correction      || Optional. Default is '1'. Enable auto correction of    |
+|         |                           || search phrase.                                         |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_height          || Optional. Minimum image height with units in           |
+|         |                           || dp_search_dimension_units.                             |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_width           || Optional. Minimum image width with units in            |
+|         |                           || dp_search_dimension_units.                             |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_max_height      || Optional. Maximum image height with units in           |
+|         |                           || dp_search_dimension_units.                             |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_max_width       || Optional. Maximum image width with units in            |
+|         |                           || dp_search_dimension_units.                             |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_dimension_units || Optional. Default = 'px'. Units for min and max image  |
+|         |                           || search size. Px to inc treats as 300 DPI.              |
+|         |                           || [ 'px' or 'inch' or 'cm' ]                             |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_image_url              || Optional. Search by image.                             |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_gender          || Optional. People gender 'male' or 'female' or 'both'   |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_people_only     || Optional. Only people must be present                  |
++---------+---------------------------+---------------------------------------------------------+
+| str|int | dp_search_age             || Optional. People age [ 'infant' or 'child' or          |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_full_info              || 'teenager' or                                          |
+|         |                           || '20' or '30' or '40' or '50' or '60' or '70' ]         |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_race            || Optional. People race [ 'asian' or 'brazilian' or      |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_full_info              || 'black' or 'caucasian' or 'hispanic' or 'middle' or    |
+|         |                           || 'multi' or 'native' or 'other' ]                       |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_quantity        || Optional. People quantity in the image. Means 'any'    |
+|         |                           || if greater than 3. [ 1 or 2 or 3 ]                     |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_item_permission        || Optional. Search some special type of files.           |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_full_info              || "regular" -                                            |
+|         |                           || All files (default) or "enterprise" - Curated          |
+|         |                           || Collection or "premium" - Focused Collection           |
++---------+---------------------------+---------------------------------------------------------+
 
 Response
 ::
@@ -299,27 +387,29 @@ complimentaryDownload
 Метод который возвращает ссылку на бесплатный файл для загрузки 
 
 Request
-::
-
-string  dp_command 		Command name 'complimentaryDownload'
-string  dp_apikey  		API key
-string  dp_session_id  	Session ID
-int dp_item_id  		The identifier of the item
-int dp_option   		The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ... ]
-
-dp_option для основной коллекции: "s-2015", "m-2015", "l-2015", "xl-2015", "vect"
-dp_option для премиальной коллекции: "cs", "сl", "xl-2015"
-dp_option для видео файлов: "240", "480", "720", "1080", "4k"
 
 
 
 
-complimentaryDownload
-~~~~~~~~~~~~~~~~~~~~~
 
-Метод который возвращает ссылку на бесплатный файл для загрузки 
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_command       || Command name 'complimentaryDownload'                          |
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_apikey        || API key                                                       |
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_session_id    || Session ID                                                    |
++---------+------------------+----------------------------------------------------------------+
+| int     | dp_item_id       || The identifier of the item                                    |
++---------+------------------+----------------------------------------------------------------+
+| int     | dp_option        ||The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
+|         |                  |                                                                |
+|         |                  || - для основной коллекции: "s-2015", "m-2015", "l-2015",       |
+|         |                  || "xl-2015", "vect"                                             |
+|         |                  || - для премиальной коллекции: "cs", "сl", "xl-2015"            |
+|         |                  || - для видео файлов: "240", "480", "720", "1080", "4k"         |         
++---------+------------------+----------------------------------------------------------------+
 
-Request
+
 
 +---------+------------------+----------------------------------------------------------------+
 | string  | dp_command       | Command name 'complimentaryDownload'                           |
@@ -332,14 +422,11 @@ Request
 +---------+------------------+----------------------------------------------------------------+
 | int     | dp_option        | The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
 |         |                  |                                                                |
-|         |                  || - для основной коллекции: "s-2015", "m-2015", "l-2015",       |
+|         |                  |* для основной коллекции: "s-2015", "m-2015", "l-2015",         |
 |         |                  || "xl-2015", "vect"                                             |
-|         |                  || - для премиальной коллекции: "cs","сl","xl-2015"              |
-|         |                  || - для видео файлов: "240","480","720","1080", "4k"            |
+|         |                  |* для премиальной коллекции: "cs", "сl", "xl-2015"              |
+|         |                  |* для видео файлов: "240", "480", "720", "1080", "4k"           |
 +---------+------------------+----------------------------------------------------------------+
-
-
-
 
 
 
@@ -353,35 +440,31 @@ Request
 +---------+------------------+----------------------------------------------------------------+
 | int     | dp_item_id       | The identifier of the item                                     |
 +---------+------------------+----------------------------------------------------------------+
-| int     | dp_option        |The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]   |
-|         |                  |                                                                |
-|         |                  || для основной коллекции: "s-2015", "m-2015", "l-2015",         |
-|         |                  || "xl-2015", "vect"                                             |
-|         |                  || для премиальной коллекции: "cs","сl","xl-2015"                |
-|         |                  || для видео файлов: "240","480","720","1080", "4k"              |
-+---------+------------------+----------------------------------------------------------------+
-
-
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_command       | Command name 'complimentaryDownload'                           |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_apikey        | API key                                                        |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_session_id    | Session ID                                                     |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_item_id       | The identifier of the item                                     |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_option        |The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]   |
+| int     | dp_option        | The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
 |         |                  |                                                                |
 |         |                  |* для основной коллекции: "s-2015", "m-2015", "l-2015",         |
 |         |                  | "xl-2015", "vect"                                              |
-|         |                  |* для премиальной коллекции: "cs","сl","xl-2015"                |
-|         |                  |* для видео файлов: "240","480","720","1080", "4k"              |
+|         |                  |* для премиальной коллекции: "cs", "сl", "xl-2015"              |
+|         |                  |* для видео файлов: "240", "480", "720", "1080", "4k"           |
 +---------+------------------+----------------------------------------------------------------+
 
-
-
-
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_command       | Command name 'complimentaryDownload'                           |
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_apikey        | API key                                                        |
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_session_id    | Session ID                                                     |
++---------+------------------+----------------------------------------------------------------+
+| int     | dp_item_id       | The identifier of the item                                     |
++---------+------------------+----------------------------------------------------------------+
+| int     | dp_option        | The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
+|         |                  |                                                                |
+|         |                  |                                                                |
+|         |                  |* для основной коллекции: "s-2015", "m-2015", "l-2015",         |
+|         |                  | "xl-2015", "vect"                                              |
+|         |                  |* для премиальной коллекции: "cs", "сl", "xl-2015"              |
+|         |                  |* для видео файлов: "240", "480", "720", "1080", "4k"           |
++---------+------------------+----------------------------------------------------------------+
 
 
 
@@ -389,74 +472,593 @@ Response
 ::
 
 {
-     timestamp: "2013-03-13 06:49:19" 
-     version: "1.3",                 
-     type: "success"                 
-     apiKey: "0cbc785ec3776c276bf2f" 
-     downloadLink: "http://st.depositphotos.com/storage/item/download?id=1234" 
+     "timestamp": "2013-03-13 06:49:19" 
+     "version": "1.3",                 
+     "type": "success"                 
+     "apiKey": "0cbc785ec3776c276bf2f" 
+     "downloadLink": "http://st.depositphotos.com/storage/item/download?id=1234" 
 }
 
 
 getGroupCompDownloads
 ~~~~~~~~~~~~~~~~~~~~~
-
 Возвращает все бесплатные загрузки для текущей группы 
 
 Request
-::
 
-string dp_command 		Command name 'getGroupCompDownloads'
-string dp_apikey 		API key
-string dp_session_id 	Session key
-string dp_date_start 	Start date when items were licensed
-string dp_date_end 		End date when items were licensed 
-string dp_user_id 		id of user licensed item
-int dp_limit
-int dp_offset
-string|array dp_type 	image/vector/video
++-------------+------------------+------------------------------------------------------------+
+| string      | dp_command       |Command name 'getGroupCompDownloads'                        |
++-------------+------------------+------------------------------------------------------------+
+| string      | dp_apikey        | API key                                                    |
++-------------+------------------+------------------------------------------------------------+
+| string      | dp_session_id    | Session ID                                                 |
++-------------+------------------+------------------------------------------------------------+
+| int         | dp_date_start    | Start date when items were licensed                        |
++-------------+------------------+------------------------------------------------------------+
+| string      | dp_date_end      | End date when items were licensed                          |
++-------------+------------------+------------------------------------------------------------+
+| string      | dp_user_id       | Id of user licensed item                                   |
++-------------+------------------+------------------------------------------------------------+
+| int         | dp_limit         |                                                            |
++-------------+------------------+------------------------------------------------------------+
+| int         | dp_offset        |                                                            |
++-------------+------------------+------------------------------------------------------------+
+|string|array | dp_type          | image/vector/video                                         |
++-------------+------------------+------------------------------------------------------------+
 
 Response
 ::
 
 {
-     timestamp: "2013-05-06 09:30:50"    
-     version: "1.3"                      
-     type: "success"                     
-     downloads: [
+     "timestamp": "2013-05-06 09:30:50"    
+     "version": "1.3"                      
+     "type": "success"                     
+     "downloads": [
          {
-              datetime: 1471871234      
-              filename: "File name here"
-              groupId: 12               
-              itemId: 12345678          
-              marker: 3                 
-              itemType: "video"         
-              itemLink: "/123/link.html"
-              preview: "http://st.depositphotos.com/123/linktofile/filename.jpg"     
-              width: 1920                
-              height: 1080               
-              userId: 12345678          
-              actor: [
-                  id: 12345678          
-                  username: Usertest    
+              "datetime": 1471871234      
+              "filename": "File name here"
+              "groupId": 12               
+              "itemId": 12345678          
+              "marker": 3                 
+              "itemType": "video"         
+              "itemLink": "/123/link.html"
+              "preview": "http://st.depositphotos.com/123/linktofile/filename.jpg"     
+              "width": 1920                
+              "height": 1080               
+              "userId": 12345678          
+              "actor": [
+                  "id": 12345678          
+                  "username": "Usertest"    
               ]
-              seler: [
-                  id: 12345678           
-                  username: Usertest    
+              "seler": [
+                  "id": 12345678           
+                  "username": "Usertest"    
               ]
-              download: "http://st.depositphotos.com/storage/item/download?id=1234"  
-              visible: true             
+              "download": "http://st.depositphotos.com/storage/item/download?id=1234"  
+              "visible": true             
          }
          {
              ...
          }
      ]
-     count: 2                           
+     "count": 2                           
 }
 
 
 
+Лицензирование файлов
+---------------------
+Лицензирование файлов - процесс, при котором клиент сообщает, что ему подходит этот файл и он оплачивает его.  Покупка файлов осуществляется за баланс или в долг для типа оплаты "Постоплата". Лицензирование происходит по одной из лицензий, которые были ранее сконфигурированы для аккаунта.Каждая лицензия имеет свою стоимость.
+Для лицензирования файла необходимо знать доступный список лицензий для группы, и определить какой лицензией будет лицензирован файл.
 
-Table of Contents
------------------
+getLicenseOfGroup
+~~~~~~~~~~~~~~~~
+Возвращает список лицензий доступный для группы пользователей.
 
-.. toctree::
+Request
+
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_command       | Command name 'getLicenseOfGroup'                               |
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_apikey        | API key                                                        |
++---------+------------------+----------------------------------------------------------------+
+| string  | dp_session_id    | Session ID                                                     |
++---------+------------------+----------------------------------------------------------------+
+
+Response
+::
+
+{
+     "timestamp": "2013-03-13 06:49:19",       
+     "version": "1.3",                         
+     "type": "success"                        
+     "data": {                                
+      [
+         "licenseId": 12345                   
+         "licenseName": "Digital License"     
+         "templateId": 12                     
+         "productType": "image"                
+         "sizes": {                           
+          [
+             "id": "s-2015"                   
+             "label": "Small"                 
+             "price": 12.34                   
+          ],
+          [
+             ...
+          ]
+         }
+      ],
+      [
+         ...
+      ],
+     }
+     "count": 2                               
+}
+
+
+licenseItem
+~~~~~~~~~~~
+
+Лицензирование файла
+
+Request
+
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_command        | Command name 'licenseItem'                                     |
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_apikey         | API key                                                        |
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_session_id     | Session ID                                                     |
++---------+-------------------+----------------------------------------------------------------+
+| array   | dp_licensing      | * dp_item_id => 12345678,                                      |
+|         |                   | * dp_license_id => 10123,                                      |
+|         |                   | * dp_option => "s-2015",                                       |
+|         |                   | * dp_ext_options => 27, [...], [...]]                          |
+|         |                   | Dp_ext_options => битовая маска для дополнительных опций       |
+|         |                   | доступных только для ES пользователей с  Focused моделью,      |
+|         |                   | Enhanced License, dp_option => "xl-2015" . Где:                |
+|         |                   || 1 - Unlimited print                                           |
+|         |                   || 2 - Multi-seat                                                |
+|         |                   || 4 - Extra legal warranty                                      |
+|         |                   || 8 - Product for resale and free distribution                  |
+|         |                   || 16 - Transfer rights                                          |
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_project        | Optional. Default ''                                           |
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_client         | Optional. Default ''                                           |
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_purchase_order | Optional. Default ''                                           |
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_isbn           | Optional. Default ''                                           |
++---------+-------------------+----------------------------------------------------------------+
+| string  | dp_other          | Optional. Default ''                                           |
++---------+-------------------+----------------------------------------------------------------+
+
+Параметры dp_project,  dp_client, dp_purchase_order, dp_isbn, dp_other  являются не обязательными. Параметры настраиваются менеджером и используются для удобства.
+
+Response
+ ::
+
+{
+     "timestamp": "2013-03-13 06:49:19",          
+     "version": "1.3",                            
+     "type": "success"                            
+     "status": "success"                          
+     "result": [
+         "12345678" : [                           
+             "result": "success"                  
+             "transactions": [                    
+                 "12345678" : {
+                     [                          
+                         "sizes": 2               
+                         "license": 10123         
+                         "transactionId": 1234567 
+                     ],
+                     [
+                         ...
+                     ]
+                 ]
+             }
+             "transaction": {                     
+                 [
+                     "sizes": 2                   
+                     "license": 10123             
+                     "transactionId": 12345678    
+                 ],
+                 [
+                     ...
+                 ]
+             }
+             "fileId": 12345678                    
+             "downloadLink": "http://st.depositphotos.com/storage/item/download?id=1234"
+         ]
+     ]
+}
+
+
+getLicensedItemsAction() : array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Данный метод возвращает список лицензированных файлов пользователя
+Request
+
+
+param string dp_command       	Command name 'getLicensedItems'
+param string dp_apikey       	API key
+param string dp_session_id	Session key
+param string dp_type	Optional. Type of licenses. ["paid"|"uninvoiced"|"invoiced"]. Default - all types
+param string dp_date_start	Optional. Start date when items were licensed
+param string dp_date_end	Optional. End date when items were licensed
+param int dp_user_id 	Optional. User identity filter
+param int dp_offset	Optional. Shift for page
+param int dp_limit 	Optional. Limit for display invoices per page
+
+
+
+Response
+ ::
+
+{
+     "timestamp": "2013-05-06 09:30:50"   
+     "version": "1.3"                     
+     "type": "success"                    
+     "downloads": {
+      [
+         "itemTransactionId": 123456789   
+         "licenseId": 10123               
+         "datetime": 1471871234            
+         "filename": "Some filename here" 
+         "itemId": 1234567                
+         "itemLink": "http://depositphotos.com/01234/item-name.html"  
+         "preview": "http://static5.depositphotos.com/.../depositphotos_01234-item-name.jpg"
+         "width": 110                     
+         "height": 110                    
+         "userId": 12345678               
+         "actor": [
+             "id": 12345678               
+             "username": "Username"       
+         ],
+         "seller": [
+             "id": 12345678               
+             "username": "Username"       
+         ]
+         "licenseTransferId": 1234567     
+         "status": "Invoiced"             
+         "purchaseOrder": "Some order"    
+         "invoice_id": 12345              
+         "marker": 3                      
+         "currencyId": 5                  
+         "groupId": 1234                  
+         "visible": true                   
+      ],
+      [
+         ...
+      ]
+     }
+     "count": 2
+}
+
+
+getTransactionLicenseInfoAction() : array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Данный метод возвращает информацию о лицензии для лицензированного файла 
+Request
+::
+
+param string dp_command			Command name 'getTransactionLicenseInfo'
+param string dp_apikey			API key
+param string dp_session_id			Session key
+param int dp_transaction_id		Identity of licenses transaction
+
+Response
+::
+
+{
+  "timestamp": "2013-03-25 10:10:06",              
+  "version": "1.3",                                
+  "type":"success",                                
+  "license" => [
+      "id" => 12                                  
+      "name" => "Test"                            
+      "link" => "/license-desc.html"               
+      "fields" => []                              
+      "transferId" => 12|null                     
+  ],
+  "transaction" => [
+      "id" => 12                                  
+      "price" => 12.99                            
+      "size" => "xs|s|m|l|xl|xxl|vect|.."         
+      "timestamp" => 1234567890                   
+      "currencyId" => 5                           
+  ],
+  "item" => [
+      "id" => 12                                  
+      "filename" => "test.jpg"                    
+      "type" => "image|vector|video"              
+      "isEditorial" => true|false                 
+      "isNudity" => true|false                    
+      "preview" => "http://static6.depositphotos.com/..." 
+      "link" => "http://test"                     
+      "width" => 1080                             
+      "height" => 1920                            
+  ],
+  from: [                                       
+      company: "Depositphotos Inc."             
+      address: "547 Broadway, ..."              
+      someAnotherKey: anotherValue              
+      ... : ...
+  ]
+  to: [                                         
+      company: "Some user company"              
+      address: "Company address here"           
+      someAnotherKey: anotherValue              
+      ... : ...
+  ]
+  transferredTo: [                              
+      company: "Some user company"              
+      address: "Company address here"           
+      someAnotherKey: anotherValue              
+      ... : ...
+  ]
+}
+
+   
+
+Transferred Licenses
+-------------------------------
+Трансфер лицензий позволяет передавать права на использование айтема сторонним лицам
+
+transferEnterpriseLicenseAction() : array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Transfers license from current user to another user
+Request
+::
+
+param str dp_command 			Command name 'transferEnterpriseLicense'
+param str dp_apikey 				API key
+param str dp_session_id 			Session key
+param int dp_item_transaction_id 		Transaction id. Optional
+param array dp_item_transaction_ids 	Transaction ids. Optional.
+One of dp_item_transaction_id or dp_item_transaction_ids should be passed
+param array dp_from 				From data. {"company":..., "fullName":...,"address":..., 
+"city":..., "state":..., "zip":..., "email","phone":...,
+"country":..., "website":...}
+param array dp_to 				To data {"company":..., "fullName":..., "address":..., 
+"city":..., "state":..., "zip":..., "email","phone":..., 
+"country":..., "website":...}
+
+
+Response
+::
+
+{
+     timestamp: "2013-05-06 09:30:50"           
+     version: "1.3"                             
+     type: "success"                            
+     result: true|false                         
+}
+
+
+getTransferredLicensesAction() : array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns transferred licenses for the current enterprise user's group
+
+Request
+::
+
+param str dp_command 		Command name 'getTransferredLicenses'
+param str dp_apikey 			API key
+param str dp_session_id 		Session key
+param int dp_offset 			Shift for page
+param int dp_limit		 	Limit for display invoices per page
+param str dp_date_start 		Optional. Start date when items were licensed
+param str dp_date_end 		Optional. End date when items were licensed 
+param int dp_user_id 		Optional. User identity filter
+param str dp_type 			Optional. Type of licenses. ["paid"|"uninvoiced"|"invoiced"]. 
+Default - all types
+
+
+
+Response 
+::
+
+{
+     timestamp: "2013-05-06 09:30:50"   
+     version: "1.3"                     
+     type: "success"                    
+     downloads: {
+      [
+         itemTransactionId: 123456789   
+         licenseId: 10123               
+         datetime: 1471871234           
+         filename: "Some filename here" 
+         itemId: 1234567                
+         itemLink: "http://depositphotos.com/01234/item-name.html"  
+         preview: "http://static5.depositphotos.com/.../depositphotos_01234-item-name.jpg"
+         width: 110                     
+         height: 110                    
+         userId: 12345678               
+         actor: [
+             id: 12345678               
+             username: "Username"       
+         ],
+         seller: [
+             id: 12345678               
+             username: "Username"       
+         ]
+         licenseTransferId: 1234567     
+         status: "Invoiced"             
+         purchaseOrder: "Some order"    
+         marker: 3                      
+         currencyId: 5                  
+         groupId: 1234                  
+         visible: true                  
+      ],
+      [
+         ...
+      ]
+     }
+     count: 2
+}
+
+
+Создание и работа с инвойсами
+-----------------------------
+
+createEnterpriseInvoiceAction() : array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Creates Item transactions invoice for the enterprise user
+
+Request
+::
+
+
+param str dp_command				Command name 'createEnterpriseInvoice'
+param str dp_apikey				API key
+param str dp_session_id			Session key
+param array dp_item_transaction_ids	Transaction Ids to include into the invoice as array. 
+						For example: {12345677, 12345678, 123456789}
+param str dp_field_value			Optional. Value of invoiced field to replace in the
+invoice
+
+Response 
+::
+
+{
+     timestamp: "2013-03-13 06:49:19",  
+     version: "1.3",                    
+     type: "success"                    
+     result: true|false                 
+}
+
+
+
+getEnterpriseInvoiceAction() : array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns detailed information on the invoice
+
+
+Request
+::
+
+
+param str dp_command                 Command name 'getEnterpriseInvoice'
+param str dp_apikey                  API key
+param str dp_session_id              Session key
+param int dp_invoice_id              Invoice id for detail
+
+
+Response 
+::
+
+{
+     timestamp: "2013-03-13 06:49:19",      
+     version: "1.3",                        
+     type: "success"                        
+     invoice: [                             
+         items : {                          
+          [                                 
+             description: "Balance Refill"  
+             qty: 123                       
+             price: 123                     
+          ]
+          [                                 
+             itemId: 12345678               
+             thumbUrl: "http://static5.depositphotos.com/../depositphotos_itemname.jpg"
+             licenseInfo: {                 
+              [
+                 key: "Project",            
+                 value: "Some project here" 
+              ],
+              [
+                 key: "Purchase Order",     
+                 value: "Some order here"    
+              ],
+              [
+                 ...
+              ]
+             }
+             licenseId: 10123               
+             size: "s-2015"                 
+             itemOriginalSize: [
+                 height: 1050               
+                 width: 1980                
+             ]
+             type: "image"                  
+             price: 123.45                  
+             vatPrice: 134                  
+             vatRate: 10.00                 
+             isEditorial: false             
+             isNudity: false                
+          ],
+          [
+             ...
+          ]
+         }
+         state: "paid"                      
+         total: 456.78                      
+         vat: 11.11                         
+         subTotal: 445.67                   
+         id: 987654                         
+         number: "ESI-10987654"             
+         type: "file_invoice"               
+         date: 1471871234                   
+         currencyId: 0                      
+         from: [                            
+             company: "Depositphotos Inc."   
+             address: "547 Broadway, ..."   
+             someAnotherKey: anotherValue   
+             ... : ...
+         ]
+         to: [                              
+             company: "Some user company"   
+             address: "Company address here"
+             someAnotherKey: anotherValue   
+             ... : ...
+         ]
+         paid: 1471871234                    
+     ]
+}
+
+getEnterpriseInvoiceCountAction() : array 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enterprise group invoices count
+
+
+Request
+::
+
+
+str dp_command				Command name 'getEnterpriseInvoiceCount'
+param str dp_apikey				API key
+param str dp_session_id			Session key
+param str dp_state				Optional. Invoice state ["unpaid"|"paid"|"cancelled"].
+Default - all
+param int dp_group_id			Optional. Group id to filter
+
+
+Response 
+::
+
+{
+     timestamp: "2013-03-13 06:49:19",          
+     version: "1.3",                             
+     type: "success"                            
+     count: 2                                   
+     data: {
+      [
+         id: 987654                             
+         date: 1471871234                       
+         description: "Invoice description here"
+         number: "ESI-10987654"                 
+         type: "file_invoice"                   
+         price: 123.45                          
+         amount: 123.45                         
+         paymentDate: 1471871234                
+         currencyId => 5                        
+      ],
+      [
+         ...
+      ]
+     }
+}
