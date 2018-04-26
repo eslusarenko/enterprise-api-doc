@@ -178,14 +178,46 @@ Request
 | string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are |
 |         |                 | looking for                                                     |
 +---------+-----------------+-----------------------------------------------------------------+
-| int     | dp_search_sort  | Optional. Default is 4.               |- 1 is for 'best_match'  |
-|         |                 | Definition of the sort type           |- 4 is for 'best_sales'  |
-|         |                 | (number from 1 to 6, each number      |- 5 is for 'newest'      |
-|         |                 | equals sort type). In fact,           |- 6 is for 'undiscovered'|
-|         |                 | 2nd an 3rd search type are equal 4th  |                         |
-|         |                 | now ("best_sales"). So you should use |                         |
-|         |                 | 1, 4, 5 and 6 sort type.              |                         |
+| int     | dp_search_sort  | Optional. Default is 4.              | - 1 is for 'best_match'  |
+|         |                 | Definition of the sort type          | - 4 is for 'best_sales'  |
+|         |                 | (number from 1 to 6, each number     | - 5 is for 'newest'      |
+|         |                 | equals sort type). In fact,          | - 6 is for 'undiscovered'|
+|         |                 | 2nd an 3rd search type are equal 4th |                          |
+|         |                 | now ("best_sales"). So you should use|                          |
+|         |                 | 1, 4, 5 and 6 sort type.             |                          |
 +---------+-----------------+-----------------------------------------------------------------+
+
+
+
+
+
+Option Lists
+------------
+
+For listing command-line options:
+
+-a            command-line option "a"
+-b file       options can have arguments
+              and long descriptions
+--long        options can be long also
+--input=file  long options can also have
+              arguments
+
+--very-long-option
+              The description can also start on the next line.
+              
+              The description may contain multiple body elements,
+              regardless of where it starts.
+
+-x, -y, -z    Multiple options are an "option group".
+-v, --verbose  Commonly-seen: short & long options.
+-1 file, --one=file, --two file
+              Multiple options with arguments.
+/V            DOS/VMS-style options too
+
+There must be at least two spaces between the option and the description.
+
+
 
 
 
