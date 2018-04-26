@@ -166,7 +166,7 @@ Request
 |         |                           || Definition of the sort type | - 4 is for 'best_sales'  |
 |         |                           || (number from 1 to 6, each   | - 5 is for 'newest'      |
 |         |                           || number equals tp sort type) | - 6 is for 'undiscovered'|
-+---------+---------------------------+----------------------------------------+----------------+
++---------+---------------------------+------------------------------+--------------------------+
 | int     | dp_search_limit           || Optional. Default is 100. A limit to the number of     |
 |         |                           || returned search results                                |
 +---------+---------------------------+---------------------------------------------------------+
@@ -176,43 +176,45 @@ Request
 | string  | dp_search_categories      || Optional. Space-delimited list of category identifiers |
 |         |                           || to search for (e.g. '34 35 23')                        |
 | int     | dp_search_color           || Optional. Search by the dominant color of the image.   |
-+---------+---------------------------+--------------------------------+----+---------+---------+
-|         |                           || List of colors                | 0  | any     |         |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 1  | blue    | #00007c |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 2  | blue    | #0005fd |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 3  | blue    | #01ffff |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 4  | green   | #027f00 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 5  | green   | #04fe00 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 6  | yellow  | #ffff00 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 7  | orange  | #f9be00 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 8  | orange  | #fecd9b |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 9  | red     | #fe0000 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 10 | red     | #7e0004 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 11 | brown   | #653201 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 12 | violet  | #ff01ff |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 13 | violet  | #810081 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 14 | grey    | #bfbfbf |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 15 | grey    | #7a7a7a |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 16 | black   | #000000 |
-|         |                           ||                               +----+---------+---------+
-|         |                           ||                               | 17 | white   | #ffffff |
-|         |                           ||                               +----+---------+---------+
++---------+---------------------------+---------------------------------------------------------+
+|         |                           || List of colors                                         |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 0  | any     |         |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 1  | blue    | #00007c |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 2  | blue    | #0005fd |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 3  | blue    | #01ffff |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 4  | green   | #027f00 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 5  | green   | #04fe00 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 6  | yellow  | #ffff00 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 7  | orange  | #f9be00 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 8  | orange  | #fecd9b |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 9  | red     | #fe0000 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 10 | red     | #7e0004 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 11 | brown   | #653201 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 12 | violet  | #ff01ff |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 13 | violet  | #810081 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 14 | grey    | #bfbfbf |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 15 | grey    | #7a7a7a |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 16 | black   | #000000 |                           |
+|         |                           ||   +----+---------+---------+                           |
+|         |                           ||   | 17 | white   | #ffffff |                           |
+|         |                           ||   +----+---------+---------+                           |
 |         |                           ||                                                        |
 +---------+---------------------------+---------------------------------------------------------+
 | bool    | dp_search_nudity          || Optional. Default is 0. If false, any search results   |
@@ -255,17 +257,14 @@ Request
 | string  | dp_tracking_url           || Optional. Affiliate tracking link.                     |
 +---------+---------------------------+---------------------------------------------------------+
 | bool    | dp_full_info              || Optional. Default is false. Return full info about     |
-+---------+---------------------------+---------------------------------------------------------+
-| bool    | dp_full_info              || items.                                                 |
+|         |                           || items.                                                 |
 +---------+---------------------------+---------------------------------------------------------+
 | string  | dp_watermark              || Optional. Watermark to use: depositphotos or neutral.  |
 |         |                           || Default is neutral.                                    |
 +---------+---------------------------+---------------------------------------------------------+
 | string  | dp_translate_items        || Optional. Default is false. If true: title, description|
 |         |                           || and categories will be translated (if translation      |
-+---------+---------------------------+---------------------------------------------------------+
-| bool    | dp_full_info              || exists)                                                |
-|         |                           || to language dp_lang                                    |
+|         |                           || exists) to language dp_lang                            |
 +---------+---------------------------+---------------------------------------------------------+
 | string  | dp_lang                   || Optional. Default is 'en'. Language for translation    |
 |         |                           || (de, ru, fr, sp, zh (for chinese) etc.)                |
@@ -295,25 +294,23 @@ Request
 +---------+---------------------------+---------------------------------------------------------+
 | bool    | dp_search_people_only     || Optional. Only people must be present                  |
 +---------+---------------------------+---------------------------------------------------------+
-| str|int | dp_search_age             || Optional. People age [ 'infant' or 'child' or          |
-+---------+---------------------------+---------------------------------------------------------+
-| bool    | dp_full_info              || 'teenager' or                                          |
-|         |                           || '20' or '30' or '40' or '50' or '60' or '70' ]         |
+| str|int | dp_search_age             || Optional. People age: 'infant' or 'child' or           |
+|         |                           || 'teenager' or '20' or '30' or '40' or '50' or '60'     |
+|         |                           || or '70'                                                |
 +---------+---------------------------+---------------------------------------------------------+
 | string  | dp_search_race            || Optional. People race [ 'asian' or 'brazilian' or      |
-+---------+---------------------------+---------------------------------------------------------+
-| bool    | dp_full_info              || 'black' or 'caucasian' or 'hispanic' or 'middle' or    |
+|         |                           || 'black' or 'caucasian' or 'hispanic' or 'middle' or    |
 |         |                           || 'multi' or 'native' or 'other' ]                       |
 +---------+---------------------------+---------------------------------------------------------+
 | int     | dp_search_quantity        || Optional. People quantity in the image. Means 'any'    |
 |         |                           || if greater than 3. [ 1 or 2 or 3 ]                     |
 +---------+---------------------------+---------------------------------------------------------+
 | string  | dp_item_permission        || Optional. Search some special type of files.           |
+|         |                           || "regular" - All files (default) or                     |
+|         |                           || "enterprise" - Curated Collection or                   |
+|         |                           || "premium" - Focused Collection                         |
 +---------+---------------------------+---------------------------------------------------------+
-| bool    | dp_full_info              || "regular" -                                            |
-|         |                           || All files (default) or "enterprise" - Curated          |
-|         |                           || Collection or "premium" - Focused Collection           |
-+---------+---------------------------+---------------------------------------------------------+
+
 
 Response
 ::
@@ -558,7 +555,7 @@ getLicenseOfGroup
 Request
 
 +---------+------------------+----------------------------------------------------------------+
-| string  | dp_command       | Command name 'getLicenseOfGroup'                               |
+| string  | dp_command       | Command name 'getLicenseOfGroup'                               
 +---------+------------------+----------------------------------------------------------------+
 | string  | dp_apikey        | API key                                                        |
 +---------+------------------+----------------------------------------------------------------+
@@ -605,16 +602,16 @@ licenseItem
 Request
 
 +---------+-------------------+----------------------------------------------------------------+
-| string  | dp_command        | Command name 'licenseItem'                                     |
+| string  | dp_command        | Command name 'licenseItem'                                     
 +---------+-------------------+----------------------------------------------------------------+
 | string  | dp_apikey         | API key                                                        |
 +---------+-------------------+----------------------------------------------------------------+
 | string  | dp_session_id     | Session ID                                                     |
 +---------+-------------------+----------------------------------------------------------------+
-| array   | dp_licensing      | * dp_item_id => 12345678,                                      |
+| array   | dp_licensing      [* [dp_item_id => 12345678,                                     |
 |         |                   | * dp_license_id => 10123,                                      |
 |         |                   | * dp_option => "s-2015",                                       |
-|         |                   | * dp_ext_options => 27, [...], [...]]                          |
+|         |                   | * dp_ext_options => 27], [...], [...]]                         |
 |         |                   | Dp_ext_options => битовая маска для дополнительных опций       |
 |         |                   | доступных только для ES пользователей с  Focused моделью,      |
 |         |                   | Enhanced License, dp_option => "xl-2015" . Где:                |
@@ -624,7 +621,7 @@ Request
 |         |                   || 8 - Product for resale and free distribution                  |
 |         |                   || 16 - Transfer rights                                          |
 +---------+-------------------+----------------------------------------------------------------+
-| string  | dp_project        | Optional. Default ''                                           |
+| string  | dp_project        | Optional. Default ''                                           
 +---------+-------------------+----------------------------------------------------------------+
 | string  | dp_client         | Optional. Default ''                                           |
 +---------+-------------------+----------------------------------------------------------------+
@@ -782,22 +779,22 @@ Response
       "width" => 1080                             
       "height" => 1920                            
   ],
-  from: [                                       
-      company: "Depositphotos Inc."             
-      address: "547 Broadway, ..."              
-      someAnotherKey: anotherValue              
+  "from": [                                       
+      "company": "Depositphotos Inc."             
+      "address": "547 Broadway, ..."              
+      "someAnotherKey": anotherValue              
       ... : ...
   ]
-  to: [                                         
-      company: "Some user company"              
-      address: "Company address here"           
-      someAnotherKey: anotherValue              
+  "to": [                                         
+      "company": "Some user company"              
+      "address": "Company address here"           
+      "someAnotherKey": anotherValue              
       ... : ...
   ]
-  transferredTo: [                              
-      company: "Some user company"              
-      address: "Company address here"           
-      someAnotherKey: anotherValue              
+  "transferredTo": [                              
+      "company": "Some user company"              
+      "address": "Company address here"           
+      "someAnotherKey": anotherValue              
       ... : ...
   ]
 }
