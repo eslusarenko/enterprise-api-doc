@@ -152,7 +152,7 @@ Request
 | string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are  |
 |         |                 | looking for                                                      |
 +---------+-----------------+---------------------------------------+--------------------------+
-| int     | dp_search_sort  | Optional. Default is 4.               | - 1 is for 'best_match'  |
+| int     | dp_search_sort  | .. Note:: Optional. Default is 4.     | - 1 is for 'best_match'  |
 |         |                 | Definition of the sort type           | - 4 is for 'best_sales'  |
 |         |                 | (number from 1 to 6, each number      | - 5 is for 'newest'      |
 |         |                 | equals sort type). In fact,           | - 6 is for 'undiscovered'|
