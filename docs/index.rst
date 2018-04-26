@@ -139,32 +139,6 @@ search
 
 Required at least one of 'dp_search_query', 'dp_search_categories', 'dp_search_user', 'dp_search_username' parameters.
 
-+---------+-----------------+-------------------------------------------------------------------------------------------------------------+
-| string  | dp_apikey       | Client API key                                                                                              |
-+---------+-----------------+-------------------------------------------------------------------------------------------------------------+
-| string  | dp_command      | Command name 'search'                                                                                       |
-+---------+-----------------+-------------------------------------------------------------------------------------------------------------+
-| string  | dp_domain       | Optional. Default is "depositphotos.com". Domain name of                                                    |
-|         |                 | one of CDN servers available (e.g. imgcontent.net)                                                          |
-+---------+-----------------+-------------------------------------------------------------------------------------------------------------+
-| string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item                                                             |
-|         |                 | id which we are looking for                                                                                 |
-+---------+-----------------+-------------------------------------------------------------------------------------------------------------+
-| int     | dp_search_sort  | Optional. Default is 4. Definition of the sort type                                                         |
-|         |                 | (number from 1 to 6, each number equals sort type).                                                         |
-|         |                 | In fact, 2nd an 3rd search type are equal 4th now                                                           |
-|         |                 | ("best_sales"). So you should use 1, 4, 5 and 6 sort type.                                                  |
-|         |                 | - 1 is for 'best_match'                                                                                     |
-|         |                 | - 4 is for 'best_sales'                                                                                     |
-|         |                 | - 5 is for 'newest'                                                                                         |
-|         |                 | - 6 is for 'undiscovered'                                                                                   |
-+---------+-----------------+-------------------------------------------------------------------------------------------------------------+
-
-
-
-
-
-
 Request
 
 +---------+-----------------+------------------------------------------------------------------+
@@ -186,76 +160,6 @@ Request
 |         |                 | now ("best_sales"). So you should use |                          |
 |         |                 | 1, 4, 5 and 6 sort type.              |                          |
 +---------+-----------------+---------------------------------------+--------------------------+
-
-
-
-
-Request
--------
-
--string dp_command       Command name 'logout'
--string dp_apikey        API key
--string dp_session_id    Session ID
-
-
-
-
-Option Lists
-------------
-
-For listing command-line options:
-
--a            command-line option "a"
--b file       options can have arguments
-              and long descriptions
---long        options can be long also
---input=file  long options can also have
-              arguments
-
---very-long-option
-              The description can also start on the next line.
-
-              The description may contain multiple body elements,
-              regardless of where it starts.
-
--x, -y, -z    Multiple options are an "option group".
--v, --verbose  Commonly-seen: short & long options.
--1 file, --one=file, --two file
-              Multiple options with arguments.
-/V            DOS/VMS-style options too
-
-There must be at least two spaces between the option and the description.
-
-
-
-
-
-Grid Tables
------------
-
-Here's a grid table followed by a simple table:
-
-+------------------------+------------+----------+----------+
-| Header row, column 1   | Header 2   | Header 3 | Header 4 |
-| (header rows optional) |            |          |          |
-+========================+============+==========+==========+
-| body row 1, column 1   | column 2   | column 3 | column 4 |
-+------------------------+------------+----------+----------+
-| body row 2             | Cells may span columns.          |
-+------------------------+------------+---------------------+
-| body row 3             | Cells may  | - Table cells       |
-+------------------------+ span rows. | - contain           |
-| body row 4             |            | - body elements.    |
-+------------------------+------------+----------+----------+
-| body row 5             | Cells may also be     |          |
-|                        | empty: ``-->``        |          |
-+------------------------+-----------------------+----------+
-
-
-
-
-
-
 
 
 Request
