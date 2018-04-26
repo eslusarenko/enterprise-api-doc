@@ -202,6 +202,7 @@ Here's a grid table followed by a simple table:
 +------------------------+------------+----------+----------+
 | body row 2             | Cells may span columns.          |
 +------------------------+------------+---------------------+
+|                        |            | Hello               |
 | body row 3             | Cells may  | - Table cells       |
 +------------------------+ span rows. | - contain           |
 | body row 4             |            | - body elements.    |
