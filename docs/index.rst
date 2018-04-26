@@ -178,13 +178,13 @@ Request
 | string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are |
 |         |                 | looking for                                                     |
 +---------+-----------------+-----------------------------------------------------------------+
-| int     | dp_search_sort  | Optional. Default is 4. Definition of the sort type (number     |
-|         |                 | from 1 to 6, each number equals sort type). In fact, 2nd an 3rd |
-|         |                 |                                                                 |
-|         |                 |                                                                 |
-|         |                 |                                                                 |
-|         |                 |                                                                 |
-|         |                 |                                                                 |
+| int     | dp_search_sort  | Optional. Default is 4.               |- 1 is for 'best_match'  |
+|         |                 | Definition of the sort type           |- 4 is for 'best_sales'  |
+|         |                 | (number from 1 to 6, each number      |- 5 is for 'newest'      |
+|         |                 | equals sort type). In fact,           |- 6 is for 'undiscovered'|
+|         |                 | 2nd an 3rd search type are equal 4th  |                         |
+|         |                 | now ("best_sales"). So you should use |                         |
+|         |                 | 1, 4, 5 and 6 sort type.              |                         |
 +---------+-----------------+-----------------------------------------------------------------+
 
 
@@ -202,7 +202,6 @@ Here's a grid table followed by a simple table:
 +------------------------+------------+----------+----------+
 | body row 2             | Cells may span columns.          |
 +------------------------+------------+---------------------+
-|                        |            | Hello               |
 | body row 3             | Cells may  | - Table cells       |
 +------------------------+ span rows. | - contain           |
 | body row 4             |            | - body elements.    |
