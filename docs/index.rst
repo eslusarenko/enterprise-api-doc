@@ -191,11 +191,11 @@ Request
 
 
 Request
-------------
+-------
 
-	string dp_command    		Command name 'logout'
-	string dp_apikey 			API key
-	string dp_session_id 		Session ID
+string dp_command    Command name 'logout'
+string dp_apikey     API key
+string dp_session_id Session ID
 
 
 
