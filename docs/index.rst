@@ -41,17 +41,18 @@ Enterprise API включает функции для поиска файлов 
 "timestamp" - текущая дата и время в формате «ГГГГ-ММ-ДД ЧЧ:ММ:СС»
 "version" - версия API, на данный момент актуальная версия 1.3
 "type" - «успех» для успешных запросов, «ошибка», если возникают некоторые ошибки
+::
 
 "error": {
-"errorcode": код ошибки
-"errormsg": сообщение об ошибке
-"exception": тип ошибки
+	"errorcode": код ошибки
+	"errormsg": сообщение об ошибке
+	"exception": тип ошибки
 }
 
 **Примечания к параметрам для методов API**
 
 bool: будет считаться TRUE для «1», «true», «on» и «yes». FALSE в противном случае.
-массив: стандартный массив http-запроса (например, param_a[] =val1 & param_a[] = val2 & param_b[first_key] = val3 & param_b[second_key] = val4).
+массив: стандартный массив http-запроса (например, ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``).
 
 Аутентификация пользователя
 ===========================
@@ -62,27 +63,28 @@ bool: будет считаться TRUE для «1», «true», «on» и «yes
 
 loginEnterprise
 ~~~~~~~~~~~~~~~
+
 Аутентификация пользователя по логину, паролю и API-ключу. Возвращает уникальный идентификатор сеанса.
 
 Request
 ::
 
-param string dp_command 			Command name 'loginEnterprise'
-param string dp_apikey 			API key
-param string dp_login_user 		Application user login
-param string dp_login_password 		Application user password
+	param string dp_command 			Command name 'loginEnterprise'
+	param string dp_apikey 				API key
+	param string dp_login_user 			Application user login
+	param string dp_login_password 		Application user password
 
 Response
 ::
 
-{
-	"timestamp": "2013-03-13 06:49:19",     
-	"version": "1.3",
-	"type": "success",
-	"apiKey": "0cbc785ec3776c276bf2f",
-	"sessionid": "cfaa06635e3c81b08",
-	"userid": "100151"
-}
+	{
+		"timestamp": "2013-03-13 06:49:19",     
+		"version": "1.3",
+		"type": "success",
+		"apiKey": "0cbc785ec3776c276bf2f",
+		"sessionid": "cfaa06635e3c81b08",
+		"userid": "100151"
+	}
 
 
 Выход из системы осуществляется с помощью запроса:
