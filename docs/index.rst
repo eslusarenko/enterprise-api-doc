@@ -177,7 +177,7 @@ Request
 +---------+-----------------+------------------------------------------------------------------+
 | string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are  |
 |         |                 | looking for                                                      |
-+---------+-----------------+------------------------------------------------------------------+
++---------+-----------------+---------------------------------------+--------------------------+
 | int     | dp_search_sort  | Optional. Default is 4.               | - 1 is for 'best_match'  |
 |         |                 | Definition of the sort type           | - 4 is for 'best_sales'  |
 |         |                 | (number from 1 to 6, each number      | - 5 is for 'newest'      |
@@ -185,7 +185,7 @@ Request
 |         |                 | 2nd an 3rd search type are equal 4th  |                          |
 |         |                 | now ("best_sales"). So you should use |                          |
 |         |                 | 1, 4, 5 and 6 sort type.              |                          |
-+---------+-----------------+------------------------------------------------------------------+
++---------+-----------------+---------------------------------------+--------------------------+
 
 
 
@@ -193,9 +193,9 @@ Request
 Request
 -------
 
-string dp_command       Command name 'logout'
-string dp_apikey        API key
-string dp_session_id    Session ID
+-string dp_command       Command name 'logout'
+-string dp_apikey        API key
+-string dp_session_id    Session ID
 
 
 
