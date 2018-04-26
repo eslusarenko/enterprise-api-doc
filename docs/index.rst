@@ -141,25 +141,25 @@ Required at least one of 'dp_search_query', 'dp_search_categories', 'dp_search_u
 
 Request
 
-+---------+-----------------+------------------------------------------------------------------+
-| string  | dp_apikey       | Client API key                                                   |
-+---------+-----------------+------------------------------------------------------------------+
-| string  | dp_command      | Command name 'search'                                            |
-+---------+-----------------+------------------------------------------------------------------+
-| string  | dp_domain       | Optional. Default is "depositphotos.com". Domain name of one of  |
-|         |                 | CDN servers available (e.g. imgcontent.net)                      |
-+---------+-----------------+------------------------------------------------------------------+
-| string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are  |
-|         |                 | looking for                                                      |
-+---------+-----------------+---------------------------------------+--------------------------+
-| int     | dp_search_sort  | .. Note:: Optional. Default is 4.     | - 1 is for 'best_match'  |
-|         |                 | Definition of the sort type           | - 4 is for 'best_sales'  |
-|         |                 | (number from 1 to 6, each number      | - 5 is for 'newest'      |
-|         |                 | equals sort type). In fact,           | - 6 is for 'undiscovered'|
-|         |                 | 2nd an 3rd search type are equal 4th  |                          |
-|         |                 | now ("best_sales"). So you should use |                          |
-|         |                 | 1, 4, 5 and 6 sort type.              |                          |
-+---------+-----------------+---------------------------------------+--------------------------+
++---------+-----------------+--------------------------------------------------------------------+
+| string  | dp_apikey       | Client API key                                                     |
++---------+-----------------+--------------------------------------------------------------------+
+| string  | dp_command      | Command name 'search'                                              |
++---------+-----------------+--------------------------------------------------------------------+
+| string  | dp_domain       | Optional. Default is "depositphotos.com". Domain name of one of    |
+|         |                 | CDN servers available (e.g. imgcontent.net)                        |
++---------+-----------------+--------------------------------------------------------------------+
+| string  | dp_search_query | A phrase in English, e.g. "woman hands" OR item id which we are    |
+|         |                 | looking for                                                        |
++---------+-----------------+-----------------------------------------+--------------------------+
+| int     | dp_search_sort  | | Optional. Default is 4.               | - 1 is for 'best_match'  |
+|         |                 | | Definition of the sort type           | - 4 is for 'best_sales'  |
+|         |                 | | (number from 1 to 6, each number      | - 5 is for 'newest'      |
+|         |                 | | equals sort type). In fact,           | - 6 is for 'undiscovered'|
+|         |                 | | 2nd an 3rd search type are equal 4th  |                          |
+|         |                 | | now ("best_sales"). So you should use |                          |
+|         |                 | | 1, 4, 5 and 6 sort type.              |                          |
++---------+-----------------+-----------------------------------------+--------------------------+
 
 
 
