@@ -317,9 +317,9 @@ Response
 ::
 
     {
-        timestamp: "2013-03-12 11:12:54",   
-        version: "1.3",                    
-        result:[                            
+        "timestamp": "2013-03-12 11:12:54",   
+        "version": "1.3",                    
+        "result" :[                            
         {
             id: 3366293,                                                
             thumbnail: "http://static4.depo...office-desk.jpg",         
@@ -608,18 +608,7 @@ Request
 +---------+-------------------+----------------------------------------------------------------+
 | string  | dp_session_id     | Session ID                                                     |
 +---------+-------------------+----------------------------------------------------------------+
-| array   | dp_licensing      [* [dp_item_id => 12345678,                                      |
-|         |                   | * dp_license_id => 10123,                                      |
-|         |                   | * dp_option => "s-2015",                                       |
-|         |                   | * dp_ext_options => 27], [...], [...]]                         |
-|         |                   | Dp_ext_options => битовая маска для дополнительных опций       |
-|         |                   | доступных только для ES пользователей с  Focused моделью,      |
-|         |                   | Enhanced License, dp_option => "xl-2015" . Где:                |
-|         |                   || 1 - Unlimited print                                           |
-|         |                   || 2 - Multi-seat                                                |
-|         |                   || 4 - Extra legal warranty                                      |
-|         |                   || 8 - Product for resale and free distribution                  |
-|         |                   || 16 - Transfer rights                                          |
+| array   | dp_licensing      | Licensing data                                                 |
 +---------+-------------------+----------------------------------------------------------------+
 | string  | dp_project        | Optional. Default ''                                           |
 +---------+-------------------+----------------------------------------------------------------+
@@ -633,6 +622,23 @@ Request
 +---------+-------------------+----------------------------------------------------------------+
 
 Параметры dp_project,  dp_client, dp_purchase_order, dp_isbn, dp_other  являются не обязательными. Параметры настраиваются менеджером и используются для удобства.
+Параметр ``dp_licensing`` должжен содержать объект с такой информацией:
+::
+    {
+        "dp_item_id": 12345678,
+        "dp_license_id": 10123,
+        "dp_option": "s-2015",
+        "dp_ext_options": 27
+    }
+
+``dp_ext_options`` содержит в себе integer, с битовой маской для дополнительных опций.
+ * 1 - Unlimited print
+ * 2 - Multi-seat
+ * 4 - Extra legal warranty
+ * 8 - Product for resale and free distribution
+ * 16 - Transfer rights
+
+
 
 Response
 ::
@@ -854,7 +860,7 @@ One of ``dp_item_transaction_id`` or ``dp_item_transaction_ids`` should be passe
         "company":..., 
         "fullName":...,
         "address":..., 
-        city":..., 
+        "city":..., 
         "state":..., 
         "zip":..., 
         "email":...,
@@ -867,10 +873,10 @@ Response
 ::
 
     {
-         timestamp: "2013-05-06 09:30:50"           
-         version: "1.3"                             
-         type: "success"                            
-         result: true|false                         
+         "timestamp": "2013-05-06 09:30:50"           
+         "version": "1.3"                             
+         "type": "success"                            
+         "result": true|false                         
     }
 
 
@@ -907,10 +913,10 @@ Response
 ::
 
     {
-         timestamp: "2013-05-06 09:30:50"   
-         version: "1.3"                     
-         type: "success"                    
-         downloads: {
+         "timestamp": "2013-05-06 09:30:50"   
+         "version": "1.3"                     
+         "type": "success"                    
+         "downloads": {
           [
              itemTransactionId: 123456789   
              licenseId: 10123               
@@ -976,10 +982,10 @@ Response
 ::
 
     {
-         timestamp: "2013-03-13 06:49:19",  
-         version: "1.3",                    
-         type: "success"                    
-         result: true|false                 
+         "timestamp": "2013-03-13 06:49:19",  
+         "version": "1.3",                    
+         "type": "success"                    
+         "result": true|false                 
     }
 
 
@@ -1007,10 +1013,10 @@ Response
 ::
 
     {
-         timestamp: "2013-03-13 06:49:19",      
-         version: "1.3",                        
-         type: "success"                        
-         invoice: [                             
+         "timestamp": "2013-03-13 06:49:19",      
+         "version": "1.3",                        
+         "type": "success"                        
+         "invoice": [                             
              items : {                          
               [                                 
                  description: "Balance Refill"  
@@ -1102,21 +1108,21 @@ Response
 ::
 
     {
-         timestamp: "2013-03-13 06:49:19",          
-         version: "1.3",                             
-         type: "success"                            
-         count: 2                                   
-         data: {
+         "timestamp": "2013-03-13 06:49:19",          
+         "version": "1.3",                             
+         "type": "success"                            
+         "count": 2                                   
+         "data": {
           [
-             id: 987654                             
-             date: 1471871234                       
-             description: "Invoice description here"
-             number: "ESI-10987654"                 
-             type: "file_invoice"                   
-             price: 123.45                          
-             amount: 123.45                         
-             paymentDate: 1471871234                
-             currencyId => 5                        
+             "id": 987654                             
+             "date": 1471871234                       
+             "description": "Invoice description here"
+             "number": "ESI-10987654"                 
+             "type": "file_invoice"                   
+             "price": 123.45                          
+             "amount": 123.45                         
+             "paymentDate": 1471871234                
+             "currencyId": 5                        
           ],
           [
              ...
