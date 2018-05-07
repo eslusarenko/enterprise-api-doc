@@ -32,18 +32,20 @@ Enterprise API включает функции для поиска файлов 
 
 **Для всех методов API есть два обязательных параметра**
 
-``dp_apikey`` - ключ API, выдаётся пользователю менеджером, после регистрации в Depositphotos
-``dp_command`` - идентификатор метода (команды) API
+* ``dp_apikey`` - ключ API, выдаётся пользователю менеджером, после регистрации в Depositphotos
+* ``dp_command`` - идентификатор метода (команды) API
 
 Для методов, требующих управления сеансом пользователя, необходим следующий обязательный параметр:
+
 ``dp_sessionid`` - уникальный идентификатор сеанса (сессии), который будет в ответе после входа
 
 Все методы API могут возвращать два разных результата: успех (success) и ошибка (failure). 
 Каждый результат success содержит параметры, специфичные для конкретного метода API, но приведенные ниже параметры являются общими для всех методов API:
 
-``timestamp`` - текущая дата и время в формате «ГГГГ-ММ-ДД ЧЧ:ММ:СС»
-``version`` - версия API, на данный момент актуальная версия 1.3
-``type`` - успех (success) для успешных запросов, ошибка (failure), если возникают ошибка.
+* ``timestamp`` - текущая дата и время в формате «ГГГГ-ММ-ДД ЧЧ:ММ:СС»
+* ``version`` - версия API, на данный момент актуальная версия 1.3
+* ``type`` - успех (success) для успешных запросов, ошибка (failure), если возникают ошибка.
+
 Пример ошибки
 ::
 
@@ -185,38 +187,38 @@ Request
 Response
 ::
 
-{
-    "timestamp": "2018-05-05 14:09:44",
-    "version": "1.3",
-    "type": "success",
-    "data": {
-        "username": "Stew"
-        "firstName": "Steave"
-        "lastName": "Rivera"
-        "city": "Futufal"
-        "avatarBig":"https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
-        "avatarSmall":"https://static.depos.../storage/avatars/1369/13607/m_1607.jpg?15246139"
-        "occupation": "Futufal"
-        "avatar": "https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
-        "userId": "13692607"
-        "address": "537 Pezis Center"
-        "email": "test3@depositphotos.com"
-        "phone": "+38012469843094040"
-        "state": "Ghg"
-        "zip": "07190"
-        "registered": "1502183924"
-        "enterpriseLite": {
-            "groupId": 1570484
-       }
-        "country": "RU",
-        "businessName": "Qwerty"
-        "timezone": "Europe/Kiev"
-        "website": "wedsite"
-        "industry": "Business Services"
-        "biography": "B0499144"
-        "vatNumber": null
-    }
-  }
+    {
+        "timestamp": "2018-05-05 14:09:44",
+        "version": "1.3",
+        "type": "success",
+        "data": {
+            "username": "Stew"
+            "firstName": "Steave"
+            "lastName": "Rivera"
+            "city": "Futufal"
+            "avatarBig":"https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
+            "avatarSmall":"https://static.depos.../storage/avatars/1369/13607/m_1607.jpg?15246139"
+            "occupation": "Futufal"
+            "avatar": "https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
+            "userId": "13692607"
+            "address": "537 Pezis Center"
+            "email": "test3@depositphotos.com"
+            "phone": "+38012469843094040"
+            "state": "Ghg"
+            "zip": "07190"
+            "registered": "1502183924"
+            "enterpriseLite": {
+                "groupId": 1570484
+           }
+            "country": "RU",
+            "businessName": "Qwerty"
+            "timezone": "Europe/Kiev"
+            "website": "wedsite"
+            "industry": "Business Services"
+            "biography": "B0499144"
+            "vatNumber": null
+        }
+    } 
 
 
 Работа с файлами
@@ -1159,7 +1161,7 @@ Request
 Response 
 ::
 
-{
+    {
          "timestamp": "2013-03-13 06:49:19",          
          "version": "1.3",                             
          "type": "success"                            
@@ -1181,5 +1183,3 @@ Response
           ]
          }
     }
-
-
