@@ -128,9 +128,92 @@ Response
 Работа с группами пользователей
 ===============================
 
+getUserEnterpriseGroup
+~~~~~~~~~~~~~~~~~~~~~~
+
+Получение информации о состоянии группы в которой состоит юзер (тип оплаты по которой работает, состояние баланса, vat и др.)
+
+Request
+
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_command        | Command name 'getUserEnterpriseGroup'                         |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_apikey         | API key                                                       |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_session_id     | Session ID                                                    |
++---------+-------------------+---------------------------------------------------------------+
+
+Response
+::
+
+{
+     "timestamp": "2013-03-13 06:49:19",      
+     "version": "1.3",                         
+     "type": "success"                        
+     "group": [                               
+         "groupId": 12345                     
+         "money": "12345.12"                    
+         "profileId": 12345                   
+         "isPostpayment": true                
+         "balance": 12345.12                  
+         "vatNumber": "AX-1234"                 
+         "vatRate": "5.5"                       
+         "vatEnabled": true                   
+     ]
+}
+
+getEnterpriseUserData
+~~~~~~~~~~~~~~~~~~~~~
+Для получения информации профиля юзера состоящего в группе используется данный метод
 
 
+Request
 
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_command        | Command name 'getEnterpriseUserData'                          |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_apikey         | API key                                                       |
++---------+-------------------+---------------------------------------------------------------+
+| string  | dp_session_id     | Session ID                                                    |
++---------+-------------------+---------------------------------------------------------------+
+| int     | dp_user_id        | Optional. Default - get info about current user               |
++---------+-------------------+---------------------------------------------------------------+
+
+Response
+::
+
+{
+    "timestamp": "2018-05-05 14:09:44",
+    "version": "1.3",
+    "type": "success",
+    "data": {
+        "username": "Stew"
+        "firstName": "Steave"
+        "lastName": "Rivera"
+        "city": "Futufal"
+        "avatarBig":"https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
+        "avatarSmall":"https://static.depos.../storage/avatars/1369/13607/m_1607.jpg?15246139"
+        "occupation": "Futufal"
+        "avatar": "https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
+        "userId": "13692607"
+        "address": "537 Pezis Center"
+        "email": "test3@depositphotos.com"
+        "phone": "+38012469843094040"
+        "state": "Ghg"
+        "zip": "07190"
+        "registered": "1502183924"
+        "enterpriseLite": {
+            "groupId": 1570484
+       }
+        "country": "RU",
+        "businessName": "Qwerty"
+        "timezone": "Europe/Kiev"
+        "website": "wedsite"
+        "industry": "Business Services"
+        "biography": "B0499144"
+        "vatNumber": null
+    }
+  }
 
 
 Работа с файлами
@@ -321,56 +404,56 @@ Response
         "version": "1.3",                    
         "result" :[                            
         {
-            id: 3366293,                                                
-            thumbnail: "http://static4.depo...office-desk.jpg",         
-            medium_thumbnail: " http://static...positphotos_1786993-Cat.jpg
-            url: "http://s...office-desk.jpg",                         
-            url2: "http://s...api_thumb_450.jpg",                       
-            url_big: "http://s...ice-desk.jpg",                         
-            url_max_qa: "http://s...ice-desk.jpg",                      
-            itemurl: "http://depositphotos.com/...office-desk.html",    
-            mp4: "http://s...../depositphotos_1232343-item-title.mp4    
-            webm: "http://s...../depositphotos_1232343-item-title.webm  
-            published: "Jan.25, 2010 12:31:33",
-            updated: "Jan.24, 2010 02:12:29",
-            itype: "image",
-            iseditorial: false,                                         
-            title: "Pretty Caucasian business woman at office desk",   
-            description: "Pretty Caucasian ... in the back",            
-            userid: 1011061,                                            
-            username: "Alexxx"                                         
-            avatar: "",                                                
-            status: "active"                                           
-            itype: "image",                                             
-            width: 6048,                                               
-            height: 4032,                                              
-            mp: 24.385536,                                             
-            original_filesize: 2643198,                                
-            original_extension: "jpg",                                 
-            exclusive: "no",                                            
-            editorial: "no",                                            
-            deposit_item_id: 3366293
-            views: 91
-            downloads: 3
-            level: "beginner"
-            similar: [
+            "id": 3366293,                                                
+            "thumbnail": "http://static4.depo...office-desk.jpg",         
+            "medium_thumbnail": " http://static...positphotos_1786993-Cat.jpg
+            "url": "http://s...office-desk.jpg",                         
+            "url2": "http://s...api_thumb_450.jpg",                       
+            "url_big": "http://s...ice-desk.jpg",                         
+            "url_max_qa": "http://s...ice-desk.jpg",                      
+            "itemurl": "http://depositphotos.com/...office-desk.html",    
+            "mp4": "http://s...../depositphotos_1232343-item-title.mp4    
+            "webm": "http://s...../depositphotos_1232343-item-title.webm  
+            "published": "Jan.25, 2010 12:31:33",
+            "updated": "Jan.24, 2010 02:12:29",
+            "itype": "image",
+            "iseditorial": false,                                         
+            "title": "Pretty Caucasian business woman at office desk",   
+            "description": "Pretty Caucasian ... in the back",            
+            "userid": 1011061,                                            
+            "username": "Alexxx"                                         
+            "avatar": "",                                                
+            "status": "active"                                           
+            "itype": "image",                                             
+            "width": 6048,                                               
+            "height": 4032,                                              
+            "mp": 24.385536,                                             
+            "original_filesize": 2643198,                                
+            "original_extension": "jpg",                                 
+            "exclusive": "no",                                            
+            "editorial": "no",                                            
+            "deposit_item_id": 3366293
+            "views": 91
+            "downloads": 3
+            "level": "beginner"
+            "similar": [
                  1034007,
                  1235904,
                  ....
             ],
-            series : [
+            "series" : [
                  1803161,
                  ....
             ]
-            same_model : [
+            "same_model" : [
                  ....
             ]
         },
         ....
         ],
-        count:13009933,         
-        hash: 1z4ep6,           
-        type: "success"         
+        "count":13009933,         
+        "hash": 1z4ep6,           
+        "type": "success"         
     }
 
 
@@ -386,29 +469,6 @@ complimentaryDownload
 
 Request
 
-
-
-
-
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_command       || Command name 'complimentaryDownload'                          |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_apikey        || API key                                                       |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_session_id    || Session ID                                                    |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_item_id       || The identifier of the item                                    |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_option        ||The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
-|         |                  |                                                                |
-|         |                  || - для основной коллекции: "s-2015", "m-2015", "l-2015",       |
-|         |                  || "xl-2015", "vect"                                             |
-|         |                  || - для премиальной коллекции: "cs", "сl", "xl-2015"            |
-|         |                  || - для видео файлов: "240", "480", "720", "1080", "4k"         |         
-+---------+------------------+----------------------------------------------------------------+
-
-
-
 +---------+------------------+----------------------------------------------------------------+
 | string  | dp_command       | Command name 'complimentaryDownload'                           |
 +---------+------------------+----------------------------------------------------------------+
@@ -418,52 +478,13 @@ Request
 +---------+------------------+----------------------------------------------------------------+
 | int     | dp_item_id       | The identifier of the item                                     |
 +---------+------------------+----------------------------------------------------------------+
-| int     | dp_option        | The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
-|         |                  |                                                                |
-|         |                  |* для основной коллекции: "s-2015", "m-2015", "l-2015",         |
-|         |                  || "xl-2015", "vect"                                             |
-|         |                  |* для премиальной коллекции: "cs", "сl", "xl-2015"              |
-|         |                  |* для видео файлов: "240", "480", "720", "1080", "4k"           |
+| int     | dp_option        | The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |          
 +---------+------------------+----------------------------------------------------------------+
 
-
-
-
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_command       | Command name 'complimentaryDownload'                           |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_apikey        | API key                                                        |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_session_id    | Session ID                                                     |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_item_id       | The identifier of the item                                     |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_option        | The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
-|         |                  |                                                                |
-|         |                  |* для основной коллекции: "s-2015", "m-2015", "l-2015",         |
-|         |                  | "xl-2015", "vect"                                              |
-|         |                  |* для премиальной коллекции: "cs", "сl", "xl-2015"              |
-|         |                  |* для видео файлов: "240", "480", "720", "1080", "4k"           |
-+---------+------------------+----------------------------------------------------------------+
-
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_command       | Command name 'complimentaryDownload'                           |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_apikey        | API key                                                        |
-+---------+------------------+----------------------------------------------------------------+
-| string  | dp_session_id    | Session ID                                                     |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_item_id       | The identifier of the item                                     |
-+---------+------------------+----------------------------------------------------------------+
-| int     | dp_option        | The size of file. ["s-2015"|"m-2015"|"l-2015"|"xl-2015"| ...]  |
-|         |                  |                                                                |
-|         |                  |                                                                |
-|         |                  |* для основной коллекции: "s-2015", "m-2015", "l-2015",         |
-|         |                  | "xl-2015", "vect"                                              |
-|         |                  |* для премиальной коллекции: "cs", "сl", "xl-2015"              |
-|         |                  |* для видео файлов: "240", "480", "720", "1080", "4k"           |
-+---------+------------------+----------------------------------------------------------------+
-
+Параметр ``dp_option`` варьируется от коллекций и контента загрузки:
+* для основной коллекции: "s-2015", "m-2015", "l-2015", "xl-2015", "vect"                                             
+* для премиальной коллекции: "cs", "сl", "xl-2015"             
+* для видео файлов: "240", "480", "720", "1080", "4k" 
 
 
 Response
@@ -486,7 +507,7 @@ getGroupCompDownloads
 Request
 
 +-------------+------------------+------------------------------------------------------------+
-| string      | dp_command       |Command name 'getGroupCompDownloads'                        |
+| string      | dp_command       | Command name 'getGroupCompDownloads'                       |
 +-------------+------------------+------------------------------------------------------------+
 | string      | dp_apikey        | API key                                                    |
 +-------------+------------------+------------------------------------------------------------+
@@ -498,9 +519,9 @@ Request
 +-------------+------------------+------------------------------------------------------------+
 | string      | dp_user_id       | Id of user licensed item                                   |
 +-------------+------------------+------------------------------------------------------------+
-| int         | dp_limit         |                                                            |
+| int         | dp_limit         | The number of downloads                                    |
 +-------------+------------------+------------------------------------------------------------+
-| int         | dp_offset        |                                                            |
+| int         | dp_offset        | The shift from the beginning                               |
 +-------------+------------------+------------------------------------------------------------+
 |string|array | dp_type          | image/vector/video                                         |
 +-------------+------------------+------------------------------------------------------------+
@@ -549,7 +570,7 @@ Response
 Для лицензирования файла необходимо знать доступный список лицензий для группы, и определить какой лицензией будет лицензирован файл.
 
 getLicenseOfGroup
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 Возвращает список лицензий доступный для группы пользователей.
 
 Request
@@ -689,24 +710,24 @@ getLicensedItems
 Request
 
 +---------+---------------+----------------------------------------------------------------+
-| string  | dp_command    | Command name 'getLicensedItems'                                |
+| string  | dp_command    || Command name 'getLicensedItems'                               |
 +---------+---------------+----------------------------------------------------------------+
-| string  | dp_apikey     | API key                                                        |
+| string  | dp_apikey     || API key                                                       |
 +---------+---------------+----------------------------------------------------------------+
-| string  | dp_session_id | Session key                                                    |
+| string  | dp_session_id || Session key                                                   |
 +---------+---------------+----------------------------------------------------------------+
-| string  | dp_type       | Optional. Type of licenses. ["paid"|"uninvoiced"|"invoiced"].  |
-|         |               | Default - all types                                            |
+| string  | dp_type       || Optional. Type of licenses. ["paid"|"uninvoiced"|"invoiced"]. |
+|         |               || Default - all types                                           |
 +---------+---------------+----------------------------------------------------------------+
-| string  | dp_date_start | Optional. Start date when items were licensed                  |
+| string  | dp_date_start || Optional. Start date when items were licensed                 |
 +---------+---------------+----------------------------------------------------------------+
-| string  | dp_date_end   | Optional. End date when items were licensed                    |
+| string  | dp_date_end   || Optional. End date when items were licensed                   |
 +---------+---------------+----------------------------------------------------------------+
-| int     | dp_user_id    | Optional. User identity filter                                 |
+| int     | dp_user_id    || Optional. User identity filter                                |
 +---------+---------------+----------------------------------------------------------------+
-| int     | dp_offset     | Optional. Shift for page                                       |
+| int     | dp_offset     || Optional. Shift for page                                      |
 +---------+---------------+----------------------------------------------------------------+
-| int     | dp_limit      | Optional. Limit for display invoices per page                  |
+| int     | dp_limit      || Optional. Limit for display invoices per page                 |
 +---------+---------------+----------------------------------------------------------------+
 
 
@@ -762,15 +783,15 @@ getTransactionLicenseInfo
 
 Request
 
-+--------+-------------------+------------------------------------------+
-| string | dp_command        | Command name 'getTransactionLicenseInfo' |
-+--------+-------------------+------------------------------------------+
-| string | dp_apikey         | API key                                  |
-+--------+-------------------+------------------------------------------+
-| string | dp_session_id     | Session key                              |
-+--------+-------------------+------------------------------------------+
-| int    | dp_transaction_id | Identity of licenses transaction         |
-+--------+-------------------+------------------------------------------+
++--------+-------------------+----------------------------------------------------------------+
+| string | dp_command        | Command name 'getTransactionLicenseInfo'                       |
++--------+-------------------+----------------------------------------------------------------+
+| string | dp_apikey         | API key                                                        |
++--------+-------------------+----------------------------------------------------------------+
+| string | dp_session_id     | Session key                                                    |
++--------+-------------------+----------------------------------------------------------------+
+| int    | dp_transaction_id | Identity of licenses transaction                               |
++--------+-------------------+----------------------------------------------------------------+
 
 Response
 ::
@@ -837,21 +858,21 @@ Transfers license from current user to another user
 
 Request
 
-+-------+-------------------------+-------------------------------------------+
-| str   | dp_command              | Command name 'transferEnterpriseLicense'  |
-+-------+-------------------------+-------------------------------------------+
-| str   | dp_apikey               | API key                                   |
-+-------+-------------------------+-------------------------------------------+
-| str   | dp_session_id           | Session key                               |
-+-------+-------------------------+-------------------------------------------+
-| int   | dp_item_transaction_id  | Transaction id. Optional                  |
-+-------+-------------------------+-------------------------------------------+
-| array | dp_item_transaction_ids | Transaction ids. Optional.                |
-+-------+-------------------------+-------------------------------------------+
-| array | dp_from                 | From data.                                |
-+-------+-------------------------+-------------------------------------------+
-| array | dp_to                   | To data                                   |
-+-------+-------------------------+-------------------------------------------+
++-------+-------------------------+----------------------------------------------------------+
+| str   | dp_command              | Command name 'transferEnterpriseLicense'                 |
++-------+-------------------------+----------------------------------------------------------+
+| str   | dp_apikey               | API key                                                  |
++-------+-------------------------+----------------------------------------------------------+
+| str   | dp_session_id           | Session key                                              |
++-------+-------------------------+----------------------------------------------------------+
+| int   | dp_item_transaction_id  | Transaction id. Optional                                 |
++-------+-------------------------+----------------------------------------------------------+
+| array | dp_item_transaction_ids | Transaction ids. Optional.                               |
++-------+-------------------------+----------------------------------------------------------+
+| array | dp_from                 | From data.                                               |
++-------+-------------------------+----------------------------------------------------------+
+| array | dp_to                   | To data                                                  |
++-------+-------------------------+----------------------------------------------------------+
 
 One of ``dp_item_transaction_id`` or ``dp_item_transaction_ids`` should be passed.
 ``dp_from`` and ``dp_to`` data should be object, that can contain follofing keys:
@@ -888,25 +909,25 @@ Returns transferred licenses for the current enterprise user's group
 
 Request
 
-+--------+---------------+-----------------------------------------------------------------+
-| string | dp_command    | Command name 'getTransferredLicenses'                           |
-+--------+---------------+-----------------------------------------------------------------+
-| string | dp_apikey     | API key                                                         |
-+--------+---------------+-----------------------------------------------------------------+
-| string | dp_session_id | Session key                                                     |
-+--------+---------------+-----------------------------------------------------------------+
-| int    | dp_offset     | Shift for page                                                  |
-+--------+---------------+-----------------------------------------------------------------+
-| int    | dp_limit      | Limit for display invoices per page                             |
-+--------+---------------+-----------------------------------------------------------------+
-| string | dp_date_start | Optional. Start date when items were licensed                   |
-+--------+---------------+-----------------------------------------------------------------+
-| string | dp_date_end   | Optional. End date when items were licensed                     |
-+--------+---------------+-----------------------------------------------------------------+
-| int    | dp_user_id    | Optional. User identity filter                                  |
-+--------+---------------+-----------------------------------------------------------------+
-| string | dp_type       | Optional. Type of licenses.                                     |
-|        |               | Can be "paid" or "uninvoiced" or"invoiced". Default - all types |
++--------+---------------+------------------------------------------------------------------+
+| string | dp_command    || Command name 'getTransferredLicenses'                           |
++--------+---------------+------------------------------------------------------------------+
+| string | dp_apikey     || API key                                                         |
++--------+---------------+------------------------------------------------------------------+
+| string | dp_session_id || Session key                                                     |
++--------+---------------+------------------------------------------------------------------+
+| int    | dp_offset     || Shift for page                                                  |
++--------+---------------+------------------------------------------------------------------+
+| int    | dp_limit      || Limit for display invoices per page                             |
++--------+---------------+------------------------------------------------------------------+
+| string | dp_date_start || Optional. Start date when items were licensed                   |
++--------+---------------+------------------------------------------------------------------+
+| string | dp_date_end   || Optional. End date when items were licensed                     |
++--------+---------------+------------------------------------------------------------------+
+| int    | dp_user_id    || Optional. User identity filter                                  |
++--------+---------------+------------------------------------------------------------------+
+| string | dp_type       || Optional. Type of licenses.                                     |
+|        |               || Can be "paid" or "uninvoiced" or"invoiced". Default - all types |
 +--------+---------------+-----------------------------------------------------------------+
 
 Response 
@@ -964,19 +985,19 @@ Creates invoice for licenses, created by group
 
 Request
 
-+--------+-------------------------+------------------------------------------------------+
-| string | dp_command              | Command name 'createEnterpriseInvoice'               |
-+--------+-------------------------+------------------------------------------------------+ 
-| string | dp_apikey               | API key                                              |
-+--------+-------------------------+------------------------------------------------------+
-| string | dp_session_id           | Session key                                          |
-+--------+-------------------------+------------------------------------------------------+       
-| array  | dp_item_transaction_ids | Transaction Ids to include into the invoice as array.|     
-|        |                         | For example: {12345677, 12345678, 123456789}         |
-+--------+-------------------------+------------------------------------------------------+    
-| string | dp_field_value          | Optional. Value of invoiced field to replace in the  |   
-|        |                         | invoice                                              |
-+--------+-------------------------+------------------------------------------------------+   
++--------+-------------------------+----------------------------------------------------------+
+| string | dp_command              || Command name 'createEnterpriseInvoice'                  |
++--------+-------------------------+----------------------------------------------------------+ 
+| string | dp_apikey               || API key                                                 |
++--------+-------------------------+----------------------------------------------------------+
+| string | dp_session_id           || Session key                                             |
++--------+-------------------------+----------------------------------------------------------+       
+| array  | dp_item_transaction_ids || Transaction Ids to include into the invoice as array.   |     
+|        |                         || For example: {12345677, 12345678, 123456789}            |
++--------+-------------------------+----------------------------------------------------------+    
+| string | dp_field_value          || Optional. Value of invoiced field to replace in the     |   
+|        |                         || invoice                                                 |
++--------+-------------------------+----------------------------------------------------------+   
 
 Response 
 ::
@@ -998,15 +1019,15 @@ Returns detailed information on the invoice
 
 Request
 
-+--------+---------------+-------------------------------------+
-| string | dp_command    | Command name 'getEnterpriseInvoice' |
-+--------+---------------+-------------------------------------+
-| string | dp_apikey     | API key                             |
-+--------+---------------+-------------------------------------+
-| string | dp_session_id | Session key                         |
-+--------+---------------+-------------------------------------+
-| int    | dp_invoice_id | Invoice id for detail               |
-+--------+---------------+-------------------------------------+
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_command    | Command name 'getEnterpriseInvoice'                               |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_apikey     | API key                                                           |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_session_id | Session key                                                       |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_invoice_id | Invoice id for detail                                             |
++--------+---------------+-------------------------------------------------------------------+
 
 
 Response 
@@ -1017,67 +1038,67 @@ Response
          "version": "1.3",                        
          "type": "success"                        
          "invoice": [                             
-             items : {                          
+             "items" : {                          
               [                                 
-                 description: "Balance Refill"  
-                 qty: 123                       
-                 price: 123                     
+                 "description": "Balance Refill"  
+                 "qty": 123                       
+                 "price": 123                     
               ]
               [                                 
-                 itemId: 12345678               
-                 thumbUrl: "http://static5.depositphotos.com/../depositphotos_itemname.jpg"
-                 licenseInfo: {                 
+                 "itemId": 12345678               
+                 "thumbUrl": "http://static5.depositphotos.com/../depositphotos_itemname.jpg"
+                 "licenseInfo": {                 
                   [
-                     key: "Project",            
-                     value: "Some project here" 
+                     "key": "Project",            
+                     "value": "Some project here" 
                   ],
                   [
-                     key: "Purchase Order",     
-                     value: "Some order here"    
+                     "key": "Purchase Order",     
+                     "value": "Some order here"    
                   ],
                   [
                      ...
                   ]
                  }
-                 licenseId: 10123               
-                 size: "s-2015"                 
-                 itemOriginalSize: [
-                     height: 1050               
-                     width: 1980                
+                 "licenseId": 10123               
+                 "size": "s-2015"                 
+                 "itemOriginalSize": [
+                     "height": 1050               
+                     "width": 1980                
                  ]
-                 type: "image"                  
-                 price: 123.45                  
-                 vatPrice: 134                  
-                 vatRate: 10.00                 
-                 isEditorial: false             
-                 isNudity: false                
+                 "type": "image"                  
+                 "price": 123.45                  
+                 "vatPrice": 134                  
+                 "vatRate": 10.00                 
+                 "isEditorial": false             
+                 "isNudity": false                
               ],
               [
                  ...
               ]
              }
-             state: "paid"                      
-             total: 456.78                      
-             vat: 11.11                         
-             subTotal: 445.67                   
-             id: 987654                         
-             number: "ESI-10987654"             
-             type: "file_invoice"               
-             date: 1471871234                   
-             currencyId: 0                      
-             from: [                            
-                 company: "Depositphotos Inc."   
-                 address: "547 Broadway, ..."   
-                 someAnotherKey: anotherValue   
+             "state": "paid"                      
+             "total": 456.78                      
+             "vat": 11.11                         
+             "subTotal": 445.67                   
+             "id": 987654                         
+             "number": "ESI-10987654"             
+             "type": "file_invoice"               
+             "date": 1471871234                   
+             "currencyId": 0                      
+             "from": [                            
+                 "company": "Depositphotos Inc."   
+                 "address": "547 Broadway, ..."   
+                 "someAnotherKey": anotherValue   
                  ... : ...
              ]
-             to: [                              
-                 company: "Some user company"   
-                 address: "Company address here"
-                 someAnotherKey: anotherValue   
+             "to": [                              
+                 "company": "Some user company"   
+                 "address": "Company address here"
+                 "someAnotherKey": anotherValue   
                  ... : ...
              ]
-             paid: 1471871234                    
+             "paid": 1471871234                    
          ]
     }
 
@@ -1090,24 +1111,56 @@ Enterprise group invoices count
 
 Request
 
-+--------+---------------+-----------------------------------------------------------+
-| string | dp_command    | Command name 'getEnterpriseInvoiceCount'                  |
-+--------+---------------+-----------------------------------------------------------+
-| string | dp_apikey     | API key                                                   |
-+--------+---------------+-----------------------------------------------------------+
-| string | dp_session_id | Session key                                               |
-+--------+---------------+-----------------------------------------------------------+
-| string | dp_state      | Optional. Invoice state. "unpaid" or "paid" or"cancelled" |
-|        |               | Default - all                                             |
-+--------+---------------+-----------------------------------------------------------+
-| int    | dp_group_id   | Optional. Group id to filter                              |
-+--------+---------------+-----------------------------------------------------------+
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_command    || Command name 'getEnterpriseInvoiceCount'                         |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_apikey     || API key                                                          |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_session_id || Session key                                                      |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_state      || Optional. Invoice state. "unpaid" or "paid" or"cancelled"        |
+|        |               || Default - all                                                    |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_group_id   || Optional. Group id to filter                                     |
++--------+---------------+-------------------------------------------------------------------+
 
 
 Response 
 ::
 
-    {
+{
+     "timestamp": "2013-03-13 06:49:19",          
+     "version": "1.3",                            
+     "type": "success"                            
+     "count": 2                                   
+}
+
+getEnterpriseInvoiceList 
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Lists enterprise invoices of group
+
+Request
+
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_command    || Command name 'getEnterpriseInvoiceList'                          |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_apikey     || API key                                                          |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_session_id || Session key                                                      |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_offset     || Shift for page                                                   |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_limit      || Limit for display invoices per page                              |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_state      || Optional. Invoice state. "unpaid" or "paid" or"cancelled"        |
+|        |               || Default - all                                                    |
++--------+---------------+-------------------------------------------------------------------+
+
+Response 
+::
+
+{
          "timestamp": "2013-03-13 06:49:19",          
          "version": "1.3",                             
          "type": "success"                            
@@ -1130,5 +1183,140 @@ Response
          }
     }
 
+getEnterpriseStatisticsDates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Для получения статистики пользователя по датам используется данный метод.
+Request
+
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_command    | Command name 'getEnterpriseStatisticsDates'                       |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_apikey     | API key                                                           |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_session_id | Session key                                                       |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_date_start | Start date for statistics in format YYYY-MM-DD HH:MI:SS           |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_date_end   | End date for statistics in format YYYY-MM-DD HH:MI:SS             |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_offset     | Query offset                                                      |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_limit      | Query limit                                                       |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_user_id    | Optional. Filter for some user by user identity                   |
++--------+---------------+-------------------------------------------------------------------+
+
+Response 
+::
+
+{
+     "timestamp": "2013-03-13 06:49:19",  
+     "version": "1.3",                    
+     "type": "success"                    
+     "data": {
+      [
+         "comps": 3                       
+         "licensed": 2                    
+         "transferred": 1                 
+         "title": "2016-01-01 07:00:00"   
+      ],
+      [
+         ...
+      ]
+     }
+     "count": 2                           
+}
 
 
+
+getEnterpriseStatisticsItems
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Данный метод выводит статистику за выбранный период по complimentary загрузкам,лицензированным и 
+transferred файлам
+
+Request
+
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_command    | Command name 'getEnterpriseStatisticsItems'                       |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_apikey     | API key                                                           |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_session_id | Session key                                                       |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_date_start | Start date for statistics in format YYYY-MM-DD HH:MI:SS           |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_date_end   | End date for statistics in format YYYY-MM-DD HH:MI:SS             |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_offset     | Query offset                                                      |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_limit      | Query limit                                                       |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_user_id    | User identity for statistics                                      |
++--------+---------------+-------------------------------------------------------------------+
+
+Response 
+::
+
+{
+     "timestamp": "2013-03-13 06:49:19",              
+     "version": "1.3",                                
+     "type": "success"                                
+     "data": {
+      [
+         "comps": 3                                   
+         "licenses": 2                                
+         "transfers": 1                               
+         "id": 1234567                                
+         "blocked": false                             
+         "height": 1050                               
+         "width": 1980                                
+         "type": "i"                                  
+         "title": "Some item title"                   
+         "description": "Some item description"       
+         "filename": "filename"                       
+         "thumbname": "thumbname"                     
+         "sellerId": 1234567                          
+         "sellerName": "Name"                         
+         "editorial": false                           
+         "mp": 12.23                                  
+         "thumbSource": "static3.depositphotos.com"   
+         "uploadTimestamp": 1471871234                 
+         "nudity": false                              
+      ],
+      [
+         ...
+      ]
+     }
+     "count": 2                                       
+}
+
+getEnterpriseStatisticsTotal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Для получения общей статистики пользователя используется данный метод.
+Request
+
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_command    | Command name 'getEnterpriseStatisticsTotal'                       |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_apikey     | API key                                                           |
++--------+---------------+-------------------------------------------------------------------+
+| string | dp_session_id | Session key                                                       |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_date_start | Start date for statistics in format YYYY-MM-DD HH:MI:SS           |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_date_end   | End date for statistics in format YYYY-MM-DD HH:MI:SS             |
++--------+---------------+-------------------------------------------------------------------+
+| int    | dp_user_id    | Optional. Filter for some user by user identity                   |
++--------+---------------+-------------------------------------------------------------------+
+
+Response 
+::
+
+{
+     "timestamp": "2013-05-06 09:30:50"   
+     "version": "1.3"                     
+     "type": "success"                    
+     "comps": 56                          
+     "licensed": 34                       
+     "transferred": 12                    
+}
