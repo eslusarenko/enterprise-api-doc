@@ -392,6 +392,32 @@ List of colors:
 | 17 | white   | #ffffff |
 +----+---------+---------+
 
+List of languages:
+ * ``en`` - English
+ * ``de`` - Deutsch
+ * ``fr`` - Français
+ * ``sp`` - Español
+ * ``ru`` - Русский
+ * ``it`` - Italiano
+ * ``pt`` - Português
+ * ``es`` - Español
+ * ``pl`` - Polski
+ * ``nl`` - Nederlands
+ * ``jp`` - 日本語
+ * ``cz`` - Česky
+ * ``se`` - Svenska
+ * ``zh`` - 中文
+ * ``tr`` - Türkçe
+ * ``mx`` - Español (Mexico)
+ * ``gr`` - Ελληνικά
+ * ``ko`` - 한국어
+ * ``br`` - Português (Brasil)
+ * ``hu`` - Magyar
+ * ``uk`` - Українська
+ * ``ro`` - Română
+ * ``id`` - Bahasa Indonesia
+ * ``th`` - ไทย
+
 Response
 ::
 
@@ -645,6 +671,7 @@ Parameters ``dp_project``,  ``dp_client``, ``dp_purchase_order``, ``dp_isbn``, `
     }
 
 ``dp_ext_options`` parameter contains integer with a bit mask for additional options:
+
  * 1 - Unlimited print
  * 2 - Multi-seat
  * 4 - Extra legal warranty
