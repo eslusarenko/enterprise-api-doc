@@ -19,6 +19,7 @@ Enterprise API includes features for searching files in the Depositphotos databa
 
 General information
 -------------------
+
 Registration
 In order to work with Depositphotos as a corporate client, you need an Enterprise account at Depositphotos and an access key to Enterprise API (you can get it from the manager.) 
 
@@ -27,6 +28,7 @@ After obtaining the API key, you can start working with Enterprise API.
 
 General principles for working with Enterprise API
 --------------------------------------------------
+
 All Enterprise API calls are performed through HTTP protocol with GET or POST parameters set. API returns a response to JSON format.
 
 **There are two mandatory parameters for all API methods**
@@ -69,6 +71,7 @@ Session ID remains valid for three hours. So, to provide uninterrupted work, it�
 
 loginEnterprise
 ~~~~~~~~~~~~~~~
+
 User authentication with a login, password, and API key. Returns a unique session ID
 
 
@@ -104,6 +107,7 @@ Logout is performed using the request:
 
 logout
 ~~~~~~
+
 Logout (close API session)
 
 
@@ -132,6 +136,7 @@ Working with user groups
 
 getUserEnterpriseGroup
 ~~~~~~~~~~~~~~~~~~~~~~
+
 Getting information on the group the user belongs to (type of payment, balance, vat, etc.)
 
 
@@ -168,6 +173,7 @@ Response
 
 getEnterpriseUserData
 ~~~~~~~~~~~~~~~~~~~~~
+
 This method is used to get account data of the user belonging to the group
 
 
@@ -222,6 +228,7 @@ Response
 
 Working with files
 ==================
+
 License types and content licensing prices are stipulated in the agreement. 
 
 If you work on a prepaid basis ("Prepaid"), you need positive account balance to license the content.
@@ -231,6 +238,7 @@ If you work with on a postpaid basis, an invoice for all licensed content is iss
 
 search
 ~~~~~~
+
 Content search
 The method is designed to search content files by given parameters.
 
@@ -481,11 +489,13 @@ Response
 
 Complimentary downloads
 -----------------------
+
 All corporate users of Enterprise API can download high-resolution test samples without watermarks (unless special downloading rights are set.)
 
 
 complimentaryDownload
 ~~~~~~~~~~~~~~~~~~~~~
+
 Returns a link to a file for free download  
 
 Request
@@ -522,6 +532,7 @@ To view information on free downloads over a selected period, the following meth
 
 getGroupCompDownloads
 ~~~~~~~~~~~~~~~~~~~~~
+
 Returns all free downloads for a current group. 
 
 Request
@@ -586,11 +597,13 @@ Response
 
 Licensing of files
 ------------------
+
 Licensing of files is the process when a client informs that the file suits him/her and then he/she pays for it.  Files purchase is performed using account balance or on credit in case of “Postpaid” payment. Licensing is performed under one of the licenses previously configured for the account. Each license has its own price.
 To license the file, you have to know the list of available licenses for the group and to determine the license, which will be used for licensing of the file.
 
 getLicenseOfGroup
 ~~~~~~~~~~~~~~~~~
+
 Returns a list of licenses available to the group of users.
 
 Request
@@ -637,6 +650,7 @@ Response
 
 licenseItem
 ~~~~~~~~~~~
+
 Obtaining a license to use a file
 
 Request
