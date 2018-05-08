@@ -661,7 +661,7 @@ Request
 +---------+-------------------+----------------------------------------------------------------+
 
 Parameters ``dp_project``,  ``dp_client``, ``dp_purchase_order``, ``dp_isbn``, ``dp_other``  are non-mandatory. These parameters are set up by the manager and are used for convenience.
-Параметр ``dp_licensing`` должен содержать объект с такой информацией:
+``dp_licensing`` parameter must contain an item with the following data:
 ::
     {
         "dp_item_id": 12345678,
