@@ -6,6 +6,8 @@ Depositphotos Enterprise Solution API
 
 `Enterprise Solution <https://depositphotos.com/enterprise.html>`_
 
+.. contents:: Table of Contents
+
 Введение
 ========
 
@@ -24,8 +26,6 @@ Enterprise API включает функции для поиска файлов 
 Чтобы работать с Depositphotos в качестве корпоративного клиента, вам необходима учетная запись Enterprise на Depositphotos и ключ доступа к Enterprise API (его можно получить у менеджера). 
 
 После получения API-ключа можно приступать к работе с Enterprise API.
-
-.. contents:: Table of Contents
 
 Общие принципы работы с Enterprise API
 --------------------------------------
@@ -57,7 +57,7 @@ Enterprise API включает функции для поиска файлов 
         "exception": тип ошибки
     }
 
-.. Important:: Примечания к параметрам для методов API
+.. Important::
    - bool: будет считаться TRUE для "1", FALSE для "0".
    - array: стандартный массив http-запроса. Например: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
 
