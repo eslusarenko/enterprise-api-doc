@@ -59,10 +59,10 @@ Example of an error
         "exception": error type
     }
 
-**Notes on parameters for API methods**
-
-bool: will be considered TRUE for "1", FALSE for "0".
-array: standard array of http-request. Example: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
+.. admonition:: Notes on parameters for API methods
+   
+   - bool: will be considered TRUE for "1", FALSE for "0".
+   - array: standard array of http-request. Example: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
 
 User authentication
 -------------------
@@ -88,12 +88,9 @@ Request
 +---------+-------------------+---------------------------------------------------------------+
 | string  | dp_login_password | Application user password                                     |
 +---------+-------------------+---------------------------------------------------------------+
-
-
-
     
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2013-03-13 06:49:19",     
@@ -123,8 +120,8 @@ Request
 | string  | dp_session_id     | Session ID                                                    |
 +---------+-------------------+---------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2013-03-13 06:49:19",
@@ -152,8 +149,8 @@ Request
 | string  | dp_session_id     | Session ID                                                    |
 +---------+-------------------+---------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",
@@ -191,8 +188,8 @@ Request
 | int     | dp_user_id        | Optional. Default - get info about current user               |
 +---------+-------------------+---------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2018-05-05 14:09:44",
@@ -428,8 +425,8 @@ List of languages:
  * ``id`` - Bahasa Indonesia
  * ``th`` - ไทย
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2013-03-12 11:12:54",   
@@ -518,8 +515,8 @@ Request
 * for premium collection: "cs", "сl", "xl-2015"             
 * for video files: "240", "480", "720", "1080", "4k" 
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19" 
@@ -558,8 +555,8 @@ Request
 |string|array | dp_type          | image/vector/video                                         |
 +-------------+------------------+------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"    
@@ -617,8 +614,8 @@ Request
 | string  | dp_session_id    | Session ID                                                     |
 +---------+------------------+----------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",       
@@ -694,8 +691,8 @@ Parameters ``dp_project``,  ``dp_client``, ``dp_purchase_order``, ``dp_isbn``, `
  * 8 - Product for resale and free distribution
  * 16 - Transfer rights
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",          
@@ -763,10 +760,8 @@ Request
 | int     | dp_limit      || Optional. Limit for display invoices per page                 |
 +---------+---------------+----------------------------------------------------------------+
 
-
-
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"   
@@ -826,57 +821,57 @@ Request
 | int    | dp_transaction_id | Identity of licenses transaction                               |
 +--------+-------------------+----------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
-  {
-    "timestamp": "2013-03-25 10:10:06",              
-    "version": "1.3",                                
-    "type":"success",                                
-    "license" => [
-        "id" => 12                                  
-        "name" => "Test"                            
-        "link" => "/license-desc.html"               
-        "fields" => []                              
-        "transferId" => 12|null                     
-    ],
-    "transaction" => [
-        "id" => 12                                  
-        "price" => 12.99                            
-        "size" => "xs|s|m|l|xl|xxl|vect|.."         
-        "timestamp" => 1234567890                   
-        "currencyId" => 5                           
-    ],
-    "item" => [
-        "id" => 12                                  
-        "filename" => "test.jpg"                    
-        "type" => "image|vector|video"              
-        "isEditorial" => true|false                 
-        "isNudity" => true|false                    
-        "preview" => "http://static6.depositphotos.com/..." 
-        "link" => "http://test"                     
-        "width" => 1080                             
-        "height" => 1920                            
-    ],
-    "from": [                                       
-        "company": "Depositphotos Inc."             
-        "address": "547 Broadway, ..."              
-        "someAnotherKey": anotherValue              
-        ... : ...
-    ]
-    "to": [                                         
-        "company": "Some user company"              
-        "address": "Company address here"           
-        "someAnotherKey": anotherValue              
-        ... : ...
-    ]
-    "transferredTo": [                              
-        "company": "Some user company"              
-        "address": "Company address here"           
-        "someAnotherKey": anotherValue              
-        ... : ...
-    ]
-  }
+    {
+      "timestamp": "2013-03-25 10:10:06",              
+      "version": "1.3",                                
+      "type":"success",                                
+      "license" => [
+          "id" => 12                                  
+          "name" => "Test"                            
+          "link" => "/license-desc.html"               
+          "fields" => []                              
+          "transferId" => 12|null                     
+      ],
+      "transaction" => [
+          "id" => 12                                  
+          "price" => 12.99                            
+          "size" => "xs|s|m|l|xl|xxl|vect|.."         
+          "timestamp" => 1234567890                   
+          "currencyId" => 5                           
+      ],
+      "item" => [
+          "id" => 12                                  
+          "filename" => "test.jpg"                    
+          "type" => "image|vector|video"              
+          "isEditorial" => true|false                 
+          "isNudity" => true|false                    
+          "preview" => "http://static6.depositphotos.com/..." 
+          "link" => "http://test"                     
+          "width" => 1080                             
+          "height" => 1920                            
+      ],
+      "from": [                                       
+          "company": "Depositphotos Inc."             
+          "address": "547 Broadway, ..."              
+          "someAnotherKey": anotherValue              
+          ... : ...
+      ]
+      "to": [                                         
+          "company": "Some user company"              
+          "address": "Company address here"           
+          "someAnotherKey": anotherValue              
+          ... : ...
+      ]
+      "transferredTo": [                              
+          "company": "Some user company"              
+          "address": "Company address here"           
+          "someAnotherKey": anotherValue              
+          ... : ...
+      ]
+    }
 
 
 Transfer of license
@@ -923,8 +918,8 @@ One of ``dp_item_transaction_id`` or ``dp_item_transaction_ids`` should be passe
         "website":...
     }
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"           
@@ -963,8 +958,8 @@ Request
 |        |               || Can be "paid" or "uninvoiced" or"invoiced". Default - all types |
 +--------+---------------+-----------------------------------------------------------------+
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"   
@@ -1032,8 +1027,8 @@ Request
 |        |                         || invoice                                                 |
 +--------+-------------------------+----------------------------------------------------------+   
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",  
@@ -1063,8 +1058,8 @@ Request
 +--------+---------------+-------------------------------------------------------------------+
 
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",      
@@ -1158,8 +1153,8 @@ Request
 +--------+---------------+-------------------------------------------------------------------+
 
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",
@@ -1191,8 +1186,8 @@ Request
 |        |               || Default - all                                                    |
 +--------+---------------+-------------------------------------------------------------------+
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",          
