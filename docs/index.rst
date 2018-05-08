@@ -36,7 +36,7 @@ All Enterprise API calls are performed through HTTP protocol with GET or POST pa
 
 For methods, which require user session management, the following mandatory parameter is necessary:
 
-``dp_sessionid`` - unique session ID, which will be in response after logging in
+``dp_session_id`` - unique session ID, which will be in response after logging in
 
 
 All API methods can return two different results; success and failure. 
