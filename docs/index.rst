@@ -6,6 +6,8 @@ Depositphotos Enterprise Solution API
 
 `Enterprise Solution <https://depositphotos.com/enterprise.html>`_
 
+.. contents:: Table of Contents
+
 Introduction
 ============
 
@@ -32,22 +34,21 @@ General principles for working with Enterprise API
 
 All Enterprise API calls are performed through HTTP protocol with GET or POST parameters set. API returns a response to JSON format.
 
-**There are two mandatory parameters for all API methods**
+There are two mandatory parameters for all API methods
 
-* ``dp_apikey`` - is an API key, which is issued by a manager to a user after his/her registration on Depositphotos
-* ``dp_command`` - API method (command) ID
+:dp_apikey: is an API key, which is issued by a manager to a user after his/her registration on Depositphotos
+:dp_command: API method (command) ID
 
 For methods, which require user session management, the following mandatory parameter is necessary:
 
-``dp_session_id`` - unique session ID, which will be in response after logging in
-
+:dp_session_id: unique session ID, which will be in response after logging in
 
 All API methods can return two different results; success and failure. 
 Each ‘success’ result contains specific parameters for each API method, but following parameters are general for all API methods:
 
-* ``timestamp`` - current date and time in the “YYYY-MM-DD HH:MM:SS” format
-* ``version`` - API version; the most up-to-date version is 1.3
-* ``type`` - ‘success’ for successful requests, ‘failure’ if an error occurs
+:timestamp: current date and time in the "YYYY-MM-DD HH:MM:SS" format
+:version: API version; the most up-to-date version is 1.3
+:type: 'success' for successful requests, ‘failure’ if an error occurs
 
 Example of an error
 ::

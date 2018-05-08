@@ -670,6 +670,7 @@ Request
 
 Параметры dp_project,  dp_client, dp_purchase_order, dp_isbn, dp_other  являются не обязательными. Параметры настраиваются менеджером и используются для удобства.
 Параметр ``dp_licensing`` должжен содержать объект с такой информацией:
+
 .. code-block:: json
 
     {
@@ -681,11 +682,17 @@ Request
 
 Параметр ``dp_ext_options`` содержит в себе integer, с битовой маской для дополнительных опций:
 
- * 1 - Unlimited print
- * 2 - Multi-seat
- * 4 - Extra legal warranty
- * 8 - Product for resale and free distribution
- * 16 - Transfer rights
++----+------------------------------------------+
+| 1  | Unlimited print                          |
++----+------------------------------------------+
+| 2  | Multi-seat                               |
++----+------------------------------------------+
+| 4  | Extra legal warranty                     |
++----+------------------------------------------+
+| 8  | Product for resale and free distribution |
++----+------------------------------------------+
+| 16 | Transfer rights                          |
++----+------------------------------------------+
 
 .. code-block:: json
     :caption: Response
@@ -820,56 +827,56 @@ Request
 +--------+-------------------+----------------------------------------------------------------+
 
 .. code-block:: json
-    :caption: Response
+   :caption: Response
 
-  {
-    "timestamp": "2013-03-25 10:10:06",              
-    "version": "1.3",                                
-    "type":"success",                                
-    "license" => [
-        "id" => 12                                  
-        "name" => "Test"                            
-        "link" => "/license-desc.html"               
-        "fields" => []                              
-        "transferId" => 12|null                     
-    ],
-    "transaction" => [
-        "id" => 12                                  
-        "price" => 12.99                            
-        "size" => "xs|s|m|l|xl|xxl|vect|.."         
-        "timestamp" => 1234567890                   
-        "currencyId" => 5                           
-    ],
-    "item" => [
-        "id" => 12                                  
-        "filename" => "test.jpg"                    
-        "type" => "image|vector|video"              
-        "isEditorial" => true|false                 
-        "isNudity" => true|false                    
-        "preview" => "http://static6.depositphotos.com/..." 
-        "link" => "http://test"                     
-        "width" => 1080                             
-        "height" => 1920                            
-    ],
-    "from": [                                       
-        "company": "Depositphotos Inc."             
-        "address": "547 Broadway, ..."              
-        "someAnotherKey": anotherValue              
-        ... : ...
-    ]
-    "to": [                                         
-        "company": "Some user company"              
-        "address": "Company address here"           
-        "someAnotherKey": anotherValue              
-        ... : ...
-    ]
-    "transferredTo": [                              
-        "company": "Some user company"              
-        "address": "Company address here"           
-        "someAnotherKey": anotherValue              
-        ... : ...
-    ]
-  }
+   {
+     "timestamp": "2013-03-25 10:10:06",              
+     "version": "1.3",                                
+     "type":"success",                                
+     "license" => [
+         "id" => 12                                  
+         "name" => "Test"                            
+         "link" => "/license-desc.html"               
+         "fields" => []                              
+         "transferId" => 12|null                     
+     ],
+     "transaction" => [
+         "id" => 12                                  
+         "price" => 12.99                            
+         "size" => "xs|s|m|l|xl|xxl|vect|.."         
+         "timestamp" => 1234567890                   
+         "currencyId" => 5                           
+     ],
+     "item" => [
+         "id" => 12                                  
+         "filename" => "test.jpg"                    
+         "type" => "image|vector|video"              
+         "isEditorial" => true|false                 
+         "isNudity" => true|false                    
+         "preview" => "http://static6.depositphotos.com/..." 
+         "link" => "http://test"                     
+         "width" => 1080                             
+         "height" => 1920                            
+     ],
+     "from": [                                       
+         "company": "Depositphotos Inc."             
+         "address": "547 Broadway, ..."              
+         "someAnotherKey": anotherValue              
+         ... : ...
+     ]
+     "to": [                                         
+         "company": "Some user company"              
+         "address": "Company address here"           
+         "someAnotherKey": anotherValue              
+         ... : ...
+     ]
+     "transferredTo": [                              
+         "company": "Some user company"              
+         "address": "Company address here"           
+         "someAnotherKey": anotherValue              
+         ... : ...
+     ]
+   }
 
 
 Передача лицензии
