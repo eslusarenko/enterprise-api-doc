@@ -511,6 +511,7 @@ Request
 +---------+------------------+----------------------------------------------------------------+
 
 ``dp_option`` parameter varies based on collections and downloaded content:
+
 * for main collection: "s-2015", "m-2015", "l-2015", "xl-2015", "vect"                                             
 * for premium collection: "cs", "сl", "xl-2015"             
 * for video files: "240", "480", "720", "1080", "4k" 
@@ -685,11 +686,17 @@ Parameters ``dp_project``,  ``dp_client``, ``dp_purchase_order``, ``dp_isbn``, `
 
 ``dp_ext_options`` parameter contains integer with a bit mask for additional options:
 
- * 1 - Unlimited print
- * 2 - Multi-seat
- * 4 - Extra legal warranty
- * 8 - Product for resale and free distribution
- * 16 - Transfer rights
++----+------------------------------------------+
+| 1  | Unlimited print                          |
++----+------------------------------------------+
+| 2  | Multi-seat                               |
++----+------------------------------------------+
+| 4  | Extra legal warranty                     |
++----+------------------------------------------+
+| 8  | Product for resale and free distribution |
++----+------------------------------------------+
+| 16 | Transfer rights                          |
++----+------------------------------------------+
 
 .. code-block:: json
     :caption: Response
@@ -955,8 +962,9 @@ Request
 | int    | dp_user_id    || Optional. User identity filter                                  |
 +--------+---------------+------------------------------------------------------------------+
 | string | dp_type       || Optional. Type of licenses.                                     |
-|        |               || Can be "paid" or "uninvoiced" or"invoiced". Default - all types |
-+--------+---------------+-----------------------------------------------------------------+
+|        |               || Can be "paid" or "uninvoiced" or "invoiced".Default - all types |
++--------+---------------+------------------------------------------------------------------+
+
 
 .. code-block:: json
     :caption: Response
