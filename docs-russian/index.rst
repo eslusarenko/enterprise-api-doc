@@ -350,7 +350,7 @@ Request
 |         |                           || "premium" - Focused Collection                         |
 +---------+---------------------------+---------------------------------------------------------+
 
-List of colors:
+Список доступных цветов:
 
 +----+---------+---------+
 | 0  | any     |         |
@@ -389,6 +389,33 @@ List of colors:
 +----+---------+---------+
 | 17 | white   | #ffffff |
 +----+---------+---------+
+
+Список доступных языков:
+
+ * ``en`` - English
+ * ``de`` - Deutsch
+ * ``fr`` - Français
+ * ``sp`` - Español
+ * ``ru`` - Русский
+ * ``it`` - Italiano
+ * ``pt`` - Português
+ * ``es`` - Español
+ * ``pl`` - Polski
+ * ``nl`` - Nederlands
+ * ``jp`` - 日本語
+ * ``cz`` - Česky
+ * ``se`` - Svenska
+ * ``zh`` - 中文
+ * ``tr`` - Türkçe
+ * ``mx`` - Español (Mexico)
+ * ``gr`` - Ελληνικά
+ * ``ko`` - 한국어
+ * ``br`` - Português (Brasil)
+ * ``hu`` - Magyar
+ * ``uk`` - Українська
+ * ``ro`` - Română
+ * ``id`` - Bahasa Indonesia
+ * ``th`` - ไทย
 
 Response
 ::
@@ -644,6 +671,7 @@ Request
     }
 
 Параметр ``dp_ext_options`` содержит в себе integer, с битовой маской для дополнительных опций:
+
  * 1 - Unlimited print
  * 2 - Multi-seat
  * 4 - Extra legal warranty

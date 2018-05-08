@@ -393,6 +393,7 @@ List of colors:
 +----+---------+---------+
 
 List of languages:
+
  * ``en`` - English
  * ``de`` - Deutsch
  * ``fr`` - Français
