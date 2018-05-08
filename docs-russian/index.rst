@@ -55,10 +55,9 @@ Enterprise API включает функции для поиска файлов 
         "exception": тип ошибки
     }
 
-**Примечания к параметрам для методов API**
-
-bool: будет считаться TRUE для "1", FALSE для "0".
-array: стандартный массив http-запроса. Например: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
+.. Important:: Примечания к параметрам для методов API
+   - bool: будет считаться TRUE для "1", FALSE для "0".
+   - array: стандартный массив http-запроса. Например: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
 
 Аутентификация пользователя
 ---------------------------
@@ -86,10 +85,8 @@ Request
 +---------+-------------------+---------------------------------------------------------------+
 
 
-
-    
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2013-03-13 06:49:19",     
@@ -118,8 +115,8 @@ Request
 | string  | dp_session_id     | Session ID                                                    |
 +---------+-------------------+---------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2013-03-13 06:49:19",
@@ -146,8 +143,8 @@ Request
 | string  | dp_session_id     | Session ID                                                    |
 +---------+-------------------+---------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",
@@ -185,8 +182,8 @@ Request
 | int     | dp_user_id        | Optional. Default - get info about current user               |
 +---------+-------------------+---------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2018-05-05 14:09:44",
@@ -421,8 +418,8 @@ Request
  * ``id`` - Bahasa Indonesia
  * ``th`` - ไทย
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
         "timestamp": "2013-03-12 11:12:54",   
@@ -510,8 +507,8 @@ Request
 * для премиальной коллекции: "cs", "сl", "xl-2015"             
 * для видео файлов: "240", "480", "720", "1080", "4k" 
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19" 
@@ -550,8 +547,8 @@ Request
 |string|array | dp_type          | image/vector/video                                         |
 +-------------+------------------+------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"    
@@ -609,8 +606,8 @@ Request
 | string  | dp_session_id    | Session ID                                                     |
 +---------+------------------+----------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",       
@@ -670,7 +667,8 @@ Request
 
 Параметры dp_project,  dp_client, dp_purchase_order, dp_isbn, dp_other  являются не обязательными. Параметры настраиваются менеджером и используются для удобства.
 Параметр ``dp_licensing`` должжен содержать объект с такой информацией:
-::
+.. code-block:: json
+
     {
         "dp_item_id": 12345678,
         "dp_license_id": 10123,
@@ -686,8 +684,8 @@ Request
  * 8 - Product for resale and free distribution
  * 16 - Transfer rights
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",          
@@ -757,8 +755,8 @@ Request
 
 
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"   
@@ -818,8 +816,8 @@ Request
 | int    | dp_transaction_id | Identity of licenses transaction                               |
 +--------+-------------------+----------------------------------------------------------------+
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
   {
     "timestamp": "2013-03-25 10:10:06",              
@@ -901,7 +899,8 @@ Request
 
 One of ``dp_item_transaction_id`` or ``dp_item_transaction_ids`` should be passed.
 ``dp_from`` and ``dp_to`` data should be object, that can contain follofing keys:
-::
+.. code-block:: json
+
     {
         "company":..., 
         "fullName":...,
@@ -915,8 +914,8 @@ One of ``dp_item_transaction_id`` or ``dp_item_transaction_ids`` should be passe
         "website":...
     }
 
-Response
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"           
@@ -955,8 +954,8 @@ Request
 |        |               || Can be "paid" or "uninvoiced" or"invoiced". Default - all types |
 +--------+---------------+-----------------------------------------------------------------+
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-05-06 09:30:50"   
@@ -1024,8 +1023,8 @@ Request
 |        |                         || invoice                                                 |
 +--------+-------------------------+----------------------------------------------------------+   
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",  
@@ -1055,8 +1054,8 @@ Request
 +--------+---------------+-------------------------------------------------------------------+
 
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",      
@@ -1150,8 +1149,8 @@ Request
 +--------+---------------+-------------------------------------------------------------------+
 
 
-Response 
-::
+.. code-block:: json
+    :caption: Response
 
     {
          "timestamp": "2013-03-13 06:49:19",
@@ -1183,11 +1182,10 @@ Request
 |        |               || Default - all                                                    |
 +--------+---------------+-------------------------------------------------------------------+
 
-Response
 
 .. code-block:: json
     :caption: Response
-    
+
     {
          "timestamp": "2013-03-13 06:49:19",          
          "version": "1.3",                             
