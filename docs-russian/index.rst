@@ -272,14 +272,6 @@ Request
 +---------+---------------------------+---------------------------------------------------------+
 | string  | dp_search_username        || Optional. Search by username of DepositPhotos user     |
 +---------+---------------------------+---------------------------------------------------------+
-| bool    | dp_search_nudity          || Optional. Default is 0. If false, any search results   |
-|         |                           || containing nudity will be hidden, otherwise all images.|
-+---------+---------------------------+---------------------------------------------------------+
-| int     | dp_search_user            || Optional. Search by the author, using an author        |
-|         |                           || identifier (e.g. 1000942)                              |
-+---------+---------------------------+---------------------------------------------------------+
-| string  | dp_search_username        || Optional. Search by username of DepositPhotos user     |
-+---------+---------------------------+---------------------------------------------------------+
 | string  | dp_search_orientation     || Optional. Search by the image orientation.             |
 |         |                           || 'horizontal' or 'vertical' or 'square'                 |
 +---------+---------------------------+---------------------------------------------------------+
