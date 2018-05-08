@@ -25,6 +25,8 @@ Enterprise API включает функции для поиска файлов 
 
 После получения API-ключа можно приступать к работе с Enterprise API.
 
+.. contents:: Table of Contents
+
 Общие принципы работы с Enterprise API
 --------------------------------------
 
@@ -1209,5 +1211,4 @@ Request
          }
     }
 
-.. contents:: Table of Contents
 
