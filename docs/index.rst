@@ -8,6 +8,7 @@ Depositphotos Enterprise Solution API
 
 Introduction
 ============
+
 These guidelines describe the use of API for working with Depositphotos files. These guidelines are intended for developers familiar with HTTP and JSON data transfer technologies and possessing basic knowledge of programming in any of programming languages.
 
 Enterprise API is the application access interface, which allows registered corporate clients to work with Depositphotos’ content and licenses. 
@@ -18,7 +19,7 @@ Enterprise API includes features for searching files in the Depositphotos databa
 
 
 General information
--------------------
+===================
 
 Registration
 In order to work with Depositphotos as a corporate client, you need an Enterprise account at Depositphotos and an access key to Enterprise API (you can get it from the manager.) 
@@ -63,14 +64,14 @@ bool: will be considered TRUE for "1", FALSE for "0".
 array: standard array of http-request. Example: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
 
 User authentication
-===================
+-------------------
 
 Any actions with files, as well as many other actions require user authentication.
 User authentication returns a unique session ID.
 Session ID remains valid for three hours. So, to provide uninterrupted work, it’s necessary to set up automated API user login in 1-3 hours.
 
 loginEnterprise
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
 User authentication with a login, password, and API key. Returns a unique session ID
 
@@ -106,7 +107,7 @@ Response
 Logout is performed using the request:
 
 logout
-~~~~~~
+^^^^^^
 
 Logout (close API session)
 
@@ -132,10 +133,10 @@ Response
     }
 
 Working with user groups
-========================
+------------------------
 
 getUserEnterpriseGroup
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 Getting information on the group the user belongs to (type of payment, balance, vat, etc.)
 
@@ -172,7 +173,7 @@ Response
 
 
 getEnterpriseUserData
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 This method is used to get account data of the user belonging to the group
 
@@ -227,17 +228,16 @@ Response
 
 
 Working with files
-==================
+------------------
 
 License types and content licensing prices are stipulated in the agreement. 
 
 If you work on a prepaid basis ("Prepaid"), you need positive account balance to license the content.
 If you work with on a postpaid basis, an invoice for all licensed content is issued in the end of the month.
 
- 
 
 search
-~~~~~~
+^^^^^^
 
 Content search
 The method is designed to search content files by given parameters.
@@ -494,7 +494,7 @@ All corporate users of Enterprise API can download high-resolution test samples 
 
 
 complimentaryDownload
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 Returns a link to a file for free download  
 
@@ -531,7 +531,7 @@ Response
 To view information on free downloads over a selected period, the following method is used:
 
 getGroupCompDownloads
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 Returns all free downloads for a current group. 
 
@@ -602,7 +602,7 @@ Licensing of files is the process when a client informs that the file suits him/
 To license the file, you have to know the list of available licenses for the group and to determine the license, which will be used for licensing of the file.
 
 getLicenseOfGroup
-~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 
 Returns a list of licenses available to the group of users.
 
@@ -649,7 +649,7 @@ Response
 
 
 licenseItem
-~~~~~~~~~~~
+^^^^^^^^^^^
 
 Obtaining a license to use a file
 
@@ -735,7 +735,7 @@ Response
 
 
 getLicensedItems
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 This method returns a list of user’s licensed files
 
@@ -809,7 +809,7 @@ Response
 
 
 getTransactionLicenseInfo
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The method returns information on the license issued on a file 
 
@@ -884,7 +884,7 @@ Transfer of license
 Transfer of license allows transferring rights to use the content to the third party
 
 transferEnterpriseLicense
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Transfers license from current user to another user
 
@@ -935,7 +935,7 @@ Response
 
 
 getTransferredLicenses
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 Returns transferred licenses for the current user group
 
@@ -1011,7 +1011,7 @@ Working with invoices
 ---------------------
 
 createEnterpriseInvoice
-~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Creates an invoice for licenses created by the group
 
@@ -1045,7 +1045,7 @@ Response
 
 
 getEnterpriseInvoice
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
 Returns detailed information on the invoice
 
@@ -1137,7 +1137,7 @@ Response
 
 
 getEnterpriseInvoiceCount 
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Returns number of invoices issued to the group
 
@@ -1169,7 +1169,7 @@ Response
 
 
 getEnterpriseInvoiceList 
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lists invoices of the group
 
