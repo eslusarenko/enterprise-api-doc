@@ -6,70 +6,71 @@ Depositphotos Enterprise Solution API
 
 `Enterprise Solution <https://depositphotos.com/enterprise.html>`_
 
-Introduction
-============
-These guidelines describe the use of API for working with Depositphotos files. These guidelines are intended for developers familiar with HTTP and JSON data transfer technologies and possessing basic knowledge of programming in any of programming languages.
+Введение
+========
 
-Enterprise API is the application access interface, which allows registered corporate clients to work with Depositphotos’ content and licenses. 
+В этом руководстве описывается использование API для работы с файлами Depositphotos. Это руководство предназначено для разработчиков, знакомых с технологиями передачи данных HTTP, JSON, и имеющих базовые знания программирования на любом языке программирования.
 
-To get access to Enterprise API endpoint, you need a corresponding Enterprise API key. Along with login and password, Enterprise API key provides access to Enterprise API features. Details are given below.
+Enterprise API - это интерфейс доступа к приложению, который позволяет зарегистрированным корпоративным клиентам работать с контентом и лицензиями Depositphotos. 
 
-Enterprise API includes features for searching files in the Depositphotos database, for content licensing, issuing of invoices and licensing, transfer of rights (licences), and management of working groups within one company (or corporate structure.)
+Для доступа к Enterprise API endpoint требуется соответствующий ключ Enterprise API. Ключ Enterprise API обеспечивает его доступ к функциональности Enterprise API, вместе с логином и паролем. Детальнее будет описано ниже.
 
+Enterprise API включает функции для поиска файлов в базе данных Depositphotos, лицензирования контента, формирования счетов и лицензий, передачи прав (лицензий), и управление рабочими группами в рамках одной компании (или структуры компаний).
 
-General information
--------------------
-Registration
-In order to work with Depositphotos as a corporate client, you need an Enterprise account at Depositphotos and an access key to Enterprise API (you can get it from the manager.) 
+Главная информация
+------------------
 
-After obtaining the API key, you can start working with Enterprise API.
+Регистрация
+Чтобы работать с Depositphotos в качестве корпоративного клиента, вам необходима учетная запись Enterprise на Depositphotos и ключ доступа к Enterprise API (его можно получить у менеджера). 
 
+После получения API-ключа можно приступать к работе с Enterprise API.
 
-General principles for working with Enterprise API
---------------------------------------------------
-All Enterprise API calls are performed through HTTP protocol with GET or POST parameters set. API returns a response to JSON format.
+Общие принципы работы с Enterprise API
+--------------------------------------
 
-**There are two mandatory parameters for all API methods**
+Все вызовы Enterprise API выполняются через HTTP-протокол с набором параметров GET или POST. Ответ API возвращает в формат JSON.
 
-* ``dp_apikey`` - is an API key, which is issued by a manager to a user after his/her registration on Depositphotos
-* ``dp_command`` - API method (command) ID
+**Для всех методов API есть два обязательных параметра**
 
-For methods, which require user session management, the following mandatory parameter is necessary:
+* ``dp_apikey`` - ключ API, выдаётся пользователю менеджером, после регистрации в Depositphotos
+* ``dp_command`` - идентификатор метода (команды) API
 
-``dp_sessionid`` - unique session ID, which will be in response after logging in
+Для методов, требующих управления сеансом пользователя, необходим следующий обязательный параметр:
 
+``dp_sessionid`` - уникальный идентификатор сеанса (сессии), который будет в ответе после входа
 
-All API methods can return two different results; success and failure. 
-Each ‘success’ result contains specific parameters for each API method, but following parameters are general for all API methods:
+Все методы API могут возвращать два разных результата: успех (success) и ошибка (failure). 
+Каждый результат success содержит параметры, специфичные для конкретного метода API, но приведенные ниже параметры являются общими для всех методов API:
 
-* ``timestamp`` - current date and time in the “YYYY-MM-DD HH:MM:SS” format
-* ``version`` - API version; the most up-to-date version is 1.3
-* ``type`` - ‘success’ for successful requests, ‘failure’ if an error occurs
+* ``timestamp`` - текущая дата и время в формате «ГГГГ-ММ-ДД ЧЧ:ММ:СС»
+* ``version`` - версия API, на данный момент актуальная версия 1.3
+* ``type`` - успех (success) для успешных запросов, ошибка (failure), если возникают ошибка.
 
-Example of an error
+Пример ошибки
 ::
 
     "error": {
-        "errorcode": error code
-        "errormsg": error message
-        "exception": error type
+        "errorcode": код ошибки
+        "errormsg": сообщение об ошибке
+        "exception": тип ошибки
     }
 
-**Notes on parameters for API methods**
+**Примечания к параметрам для методов API**
 
-bool: will be considered TRUE for "1", FALSE for "0".
-array: standard array of http-request. Example: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
+bool: будет считаться TRUE для "1", FALSE для "0".
+array: стандартный массив http-запроса. Например: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
 
-User authentication
-===================
+Аутентификация пользователя
+===========================
 
-Any actions with files, as well as many other actions require user authentication.
-User authentication returns a unique session ID.
-Session ID remains valid for three hours. So, to provide uninterrupted work, it’s necessary to set up automated API user login in 1-3 hours.
+Любые действия с файлами, а также многие другие действия требуют аутентификации пользователя.
+Аутентификация пользователя возвращает уникальный идентификатор сеанса (сессии).
+Идентификатор сеанса остается действительным в течение трех часов. Поэтому для обеспечения непрерывной работы необходимо настроить автоматический вход пользователя API через 1-3 часа.
 
 loginEnterprise
 ~~~~~~~~~~~~~~~
-User authentication with a login, password, and API key. Returns a unique session ID
+
+Аутентификация пользователя по логину, паролю и API-ключу. Возвращает уникальный идентификатор сеанса.
 
 
 Request
@@ -100,12 +101,12 @@ Response
     }
 
 
-Logout is performed using the request:
+Выход из системы осуществляется с помощью запроса:
 
 logout
 ~~~~~~
-Logout (close API session)
 
+Завершение работы (закрыть API-сессию)
 
 Request
 
@@ -127,13 +128,13 @@ Response
         "apiKey": "0cbc785ec3776c276bf2f"
     }
 
-Working with user groups
-========================
+Работа с группами пользователей
+===============================
 
 getUserEnterpriseGroup
 ~~~~~~~~~~~~~~~~~~~~~~
-Getting information on the group the user belongs to (type of payment, balance, vat, etc.)
 
+Получение информации о состоянии группы в которой состоит юзер (тип оплаты по которой работает, состояние баланса, vat и др.)
 
 Request
 
@@ -168,7 +169,7 @@ Response
 
 getEnterpriseUserData
 ~~~~~~~~~~~~~~~~~~~~~
-This method is used to get account data of the user belonging to the group
+Для получения информации профиля юзера состоящего в группе используется данный метод
 
 
 Request
@@ -220,19 +221,19 @@ Response
     } 
 
 
-Working with files
-==================
-License types and content licensing prices are stipulated in the agreement. 
+Работа с файлами
+================
 
-If you work on a prepaid basis ("Prepaid"), you need positive account balance to license the content.
-If you work with on a postpaid basis, an invoice for all licensed content is issued in the end of the month.
+Типы лицензий и цены на лицензирование контента зафиксированы в договоре. 
 
+Если вы работаете по предоплате ("Prepaid"), для лицензирования контента необходим положительный баланс.
+Если вы работаете с оплатой по факту лицензирования контента, в конце месяца выставляется счет на оплату за весь лицензированный контент.
  
-
 search
 ~~~~~~
-Content search
-The method is designed to search content files by given parameters.
+
+Поиск файлов
+Метод предназначен для поиска файлов по заданным параметрам.
 
 Required at least one of 'dp_search_query', 'dp_search_categories', 'dp_search_user', 'dp_search_username' parameters.
 
@@ -252,7 +253,7 @@ Request
 | int     | dp_search_sort            || Optional. Default is 4.     | - 1 is for 'best_match'  |
 |         |                           || Definition of the sort type | - 4 is for 'best_sales'  |
 |         |                           || (number from 1 to 6, each   | - 5 is for 'newest'      |
-|         |                           || number equals to sort type) | - 6 is for 'undiscovered'|
+|         |                           || number equals tщ sort type) | - 6 is for 'undiscovered'|
 +---------+---------------------------+------------------------------+--------------------------+
 | int     | dp_search_limit           || Optional. Default is 100. A limit to the number of     |
 |         |                           || returned search results                                |
@@ -299,7 +300,7 @@ Request
 | bool    | dp_search_video           || Optional. Default is false. If true, the search results|
 |         |                           || will include videos. If false - exclude.               |
 +---------+---------------------------+---------------------------------------------------------+
-| bool    | dp_search_editorial       || Optional. If true, the search results will include only|
+| bool    | dp_search_editorial       || Optional. If true, the searh results will include only |
 |         |                           || editorial items. If false - exclude. If not passed,    |
 |         |                           || this filter won't be applied.                          |
 +---------+---------------------------+---------------------------------------------------------+
@@ -461,13 +462,13 @@ Response
     }
 
 Complimentary downloads
------------------------
-All corporate users of Enterprise API can download high-resolution test samples without watermarks (unless special downloading rights are set.)
-
+----------------------
+Все корпоративные пользователи Enterprise API могут скачивать пробные образцы в высоком разрешении без водяных знаков (если не были установлены особые права на скачивание).
 
 complimentaryDownload
 ~~~~~~~~~~~~~~~~~~~~~
-Returns a link to a file for free download  
+
+Метод который возвращает ссылку на бесплатный файл для загрузки 
 
 Request
 
@@ -483,10 +484,10 @@ Request
 | int     | dp_option        | The size of file. "s-2015", "m-2015", "l-2015", etc            |          
 +---------+------------------+----------------------------------------------------------------+
 
-``dp_option`` parameter varies based on collections and downloaded content:
-* for main collection: "s-2015", "m-2015", "l-2015", "xl-2015", "vect"                                             
-* for premium collection: "cs", "сl", "xl-2015"             
-* for video files: "240", "480", "720", "1080", "4k" 
+Параметр ``dp_option`` варьируется от коллекций и контента загрузки:
+* для основной коллекции: "s-2015", "m-2015", "l-2015", "xl-2015", "vect"                                             
+* для премиальной коллекции: "cs", "сl", "xl-2015"             
+* для видео файлов: "240", "480", "720", "1080", "4k" 
 
 Response
 ::
@@ -499,11 +500,11 @@ Response
          "downloadLink": "http://st.depositphotos.com/storage/item/download?id=1234" 
     }
 
-To view information on free downloads over a selected period, the following method is used:
+Для просмотра информации по бесплатным загрузкам за выбранный период используют :
 
 getGroupCompDownloads
 ~~~~~~~~~~~~~~~~~~~~~
-Returns all free downloads for a current group. 
+Возвращает все бесплатные загрузки для текущей группы. 
 
 Request
 
@@ -565,14 +566,14 @@ Response
          "count": 2                           
     }
 
-Licensing of files
-------------------
-Licensing of files is the process when a client informs that the file suits him/her and then he/she pays for it.  Files purchase is performed using account balance or on credit in case of “Postpaid” payment. Licensing is performed under one of the licenses previously configured for the account. Each license has its own price.
-To license the file, you have to know the list of available licenses for the group and to determine the license, which will be used for licensing of the file.
+Лицензирование файлов
+---------------------
+Лицензирование файлов - процесс, при котором клиент сообщает, что ему подходит этот файл и он оплачивает его.  Покупка файлов осуществляется за баланс или в долг для типа оплаты "Постоплата". Лицензирование происходит по одной из лицензий, которые были ранее сконфигурированы для аккаунта.Каждая лицензия имеет свою стоимость.
+Для лицензирования файла необходимо знать доступный список лицензий для группы, и определить какой лицензией будет лицензирован файл.
 
 getLicenseOfGroup
 ~~~~~~~~~~~~~~~~~
-Returns a list of licenses available to the group of users.
+Возвращает список лицензий доступный для группы пользователей.
 
 Request
 
@@ -618,7 +619,8 @@ Response
 
 licenseItem
 ~~~~~~~~~~~
-Obtaining a license to use a file
+
+Получение лицензии на использование файла
 
 Request
 
@@ -642,8 +644,8 @@ Request
 | string  | dp_other          | Optional. Default ''                                           |
 +---------+-------------------+----------------------------------------------------------------+
 
-Parameters ``dp_project``,  ``dp_client``, ``dp_purchase_order``, ``dp_isbn``, ``dp_other``  are non-mandatory. These parameters are set up by the manager and are used for convenience.
-Параметр ``dp_licensing`` должен содержать объект с такой информацией:
+Параметры dp_project,  dp_client, dp_purchase_order, dp_isbn, dp_other  являются не обязательными. Параметры настраиваются менеджером и используются для удобства.
+Параметр ``dp_licensing`` должжен содержать объект с такой информацией:
 ::
     {
         "dp_item_id": 12345678,
@@ -652,7 +654,7 @@ Parameters ``dp_project``,  ``dp_client``, ``dp_purchase_order``, ``dp_isbn``, `
         "dp_ext_options": 27
     }
 
-``dp_ext_options`` parameter contains integer with a bit mask for additional options:
+Параметр ``dp_ext_options`` содержит в себе integer, с битовой маской для дополнительных опций:
  * 1 - Unlimited print
  * 2 - Multi-seat
  * 4 - Extra legal warranty
@@ -703,7 +705,7 @@ Response
 getLicensedItems
 ~~~~~~~~~~~~~~~~
 
-This method returns a list of user’s licensed files
+Метод возвращает список лицензированных файлов пользователя
 
 Request
 
@@ -777,7 +779,7 @@ Response
 getTransactionLicenseInfo
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The method returns information on the license issued on a file 
+Метод возвращает информацию о лицензии, выданной на файл 
 
 Request
 
@@ -844,10 +846,10 @@ Response
   }
 
 
-Transfer of license
--------------------
+Передача лицензии
+-----------------
 
-Transfer of license allows transferring rights to use the content to the third party
+Передача лицензии позволяет передавать права на использование контента третьей стороне
 
 transferEnterpriseLicense
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -873,7 +875,7 @@ Request
 +-------+-------------------------+----------------------------------------------------------+
 
 One of ``dp_item_transaction_id`` or ``dp_item_transaction_ids`` should be passed.
-``dp_from`` and ``dp_to`` data should be object, that can contain following keys:
+``dp_from`` and ``dp_to`` data should be object, that can contain follofing keys:
 ::
     {
         "company":..., 
@@ -903,7 +905,7 @@ Response
 getTransferredLicenses
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Returns transferred licenses for the current user group
+Returns transferred licenses for current user group
 
 Request
 
@@ -973,13 +975,13 @@ Response
 
 
 
-Working with invoices
----------------------
+Работа со счетами
+-----------------
 
 createEnterpriseInvoice
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Creates an invoice for licenses created by the group
+Creates invoice for licenses, created by group
 
 Request
 
@@ -1105,7 +1107,7 @@ Response
 getEnterpriseInvoiceCount 
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Returns number of invoices issued to the group
+Метод возвращает количество счетов, выставленных группе
 
 Request
 
@@ -1181,4 +1183,3 @@ Response
           ]
          }
     }
-
