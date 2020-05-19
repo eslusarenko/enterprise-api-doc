@@ -543,11 +543,11 @@ Request
 +-------------+------------------+------------------------------------------------------------+
 | string      | dp_session_id    | Session ID                                                 |
 +-------------+------------------+------------------------------------------------------------+
-| int         | dp_date_start    | Start date when items were licensed                        |
+| int         | dp_date_start    | Start date when items were downloaded                      |
 +-------------+------------------+------------------------------------------------------------+
-| string      | dp_date_end      | End date when items were licensed                          |
+| string      | dp_date_end      | End date when items were downloade                         |
 +-------------+------------------+------------------------------------------------------------+
-| string      | dp_user_id       | Id of user licensed item                                   |
+| string      | dp_user_id       | Id of user downloaded item                                 |
 +-------------+------------------+------------------------------------------------------------+
 | int         | dp_limit         | The number of downloads                                    |
 +-------------+------------------+------------------------------------------------------------+
