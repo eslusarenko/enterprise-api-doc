@@ -35,6 +35,7 @@ General principles for working with Enterprise API
 --------------------------------------------------
 
 All Enterprise API calls are performed through HTTPS protocol with GET or POST parameters set. API returns a response in JSON format.
+All requests must be sent to the following base url: ``https://api.depositphotos.com``
 
 There are two mandatory parameters for all API methods
 
@@ -48,7 +49,7 @@ For methods, which require user authorization, there is one more mandatory param
 For requests you can use either form-data or json format for all variables. But if you want to use JSON format, you should:
 
 * set the Content-Type header to application/json
-* pass dp_apikey and dp_command parameters in the URL (i.e. https://api.depositphotos.com?dp_apikey=123&dp_command=loginEnterprise)
+* pass dp_apikey and dp_command parameters in the URL (i.e. ``https://api.depositphotos.com?dp_apikey=123&dp_command=loginEnterprise``)
 
 Example of request with JSON format:
 ::
@@ -63,6 +64,11 @@ Example of request with form-data format:
     curl --silent https://api.depositphotos.com \
     -d 'dp_command=loginEnterprise&dp_apikey=e0a1bdd9923bc601293cd053ffa4eaf6e0a1bdd1&dp_login_user=your.login&dp_login_password=123456'
 
+One more example. The request with form-data format and dp_command/dp_apikey sent in the URL:
+::
+
+    curl --silent 'https://api.depositphotos.com?dp_command=loginEnterprise&dp_apikey=e0a1bdd9923bc601293cd053ffa4eaf6e0a1bdd1' \
+    -d 'dp_login_user=your.login&dp_login_password=123456'
 
 All API methods can return two different results: success or failure (stated in the ‘type’ variable of response).
 You should rely on the ‘type’ variable to determine the result of the request, not on response HTTP code.
