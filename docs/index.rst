@@ -24,26 +24,49 @@ General information
 ===================
 
 Registration
-In order to work with Depositphotos as a corporate client, you need an Enterprise account at Depositphotos and an access key to Enterprise API (you can get it from the manager.) 
+------------
 
-After obtaining the API key, you can start working with Enterprise API.
+In order to work with Depositphotos as a corporate client, you need an Enterprise account at Depositphotos and an access key to Enterprise API (you can get it from your manager.)
+
+After obtaining username, password and the API key, you can start working with Enterprise API.
 
 
 General principles for working with Enterprise API
 --------------------------------------------------
 
-All Enterprise API calls are performed through HTTP protocol with GET or POST parameters set. API returns a response to JSON format.
+All Enterprise API calls are performed through HTTPS protocol with GET or POST parameters set. API returns a response in JSON format.
 
 There are two mandatory parameters for all API methods
 
 :dp_apikey: is an API key, which is issued by a manager to a user after his/her registration on Depositphotos
 :dp_command: API method (command) ID
 
-For methods, which require user session management, the following mandatory parameter is necessary:
+For methods, which require user authorization, there is one more mandatory parameter required:
 
 :dp_session_id: unique session ID, which will be in response after logging in
 
-All API methods can return two different results; success and failure. 
+For requests you can use either form-data or json format for all variables. But if you want to use JSON format, you should:
+
+* set the Content-Type header to application/json
+* pass dp_apikey and dp_command parameters in the URL (i.e. https://api.depositphotos.com?dp_apikey=123&dp_command=loginEnterprise)
+
+Example of request with JSON format:
+::
+
+    curl --silent -H 'content-type: application/json' \
+    'https://api.depositphotos.com?dp_command=loginEnterprise&dp_apikey=e0a1bdd9923bc601293cd053ffa4eaf6e0a1bdd1' \
+    -d '{"dp_login_user": "something.similar.to.your.email", "dp_login_password": "yourSecurePassword"}'
+
+Example of request with form-data format:
+::
+
+    curl --silent https://api.depositphotos.com \
+    -d 'dp_command=loginEnterprise&dp_apikey=e0a1bdd9923bc601293cd053ffa4eaf6e0a1bdd1&dp_login_user=your.login&dp_login_password=123456'
+
+
+All API methods can return two different results: success or failure (stated in the ‘type’ variable of response).
+You should rely on the ‘type’ variable to determine the result of the request, not on response HTTP code.
+
 Each ‘success’ result contains specific parameters for each API method, but following parameters are general for all API methods:
 
 :timestamp: current date and time in the "YYYY-MM-DD HH:MM:SS" format
@@ -60,7 +83,7 @@ Example of an error
     }
 
 .. admonition:: Notes on parameters for API methods
-   
+
    - bool: will be considered TRUE for "1", FALSE for "0".
    - array: standard array of http-request. Example: ``param_a[]=val1&param_a[]=val2&param_b[first_key]=val3&param_b[second_key]=val4``
 
