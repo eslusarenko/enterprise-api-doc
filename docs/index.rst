@@ -623,6 +623,173 @@ Request
          "count": 2                           
     }
 
+AI Image Generator
+------------------
+The API provides endpoints that allow users to generate and retrieve images. All images created using the Depositphotos AI Image Generator can be licensed like any other file on Depositphotos through the `licenseItem`_ command.
+
+To integrate the AI Image Generator into your product and start generating images, select an API plan that meets your image generation needs.
+
+Key API Endpoints and Functionalities:
+
+
+imageGenerator.generate
+^^^^^^^^^^^^^^^^^^^^^^^
+Initiates the image generation process based on the input request. If a callback address is provided in the request, the generated image will be sent there. Otherwise, users can retrieve the result using the `imageGenerator.get`_ command.
+
+
+
+Request
+
++--------+-----------------+---------------------------------------------------------+
+| string | dp_command      | Command name 'imageGenerator.generate'                  |
++--------+-----------------+---------------------------------------------------------+
+| string | dp_apikey       | API key                                                 |
++--------+-----------------+---------------------------------------------------------+
+| string | dp_session_id   | Session ID                                              |
++--------+-----------------+---------------------------------------------------------+
+| string | dp_prompt       | The prompt for image generation. Maximum length is 400  |
++--------+-----------------+---------------------------------------------------------+
+| string | dp_callback_url | Optional. Callback URL where the results will be sent   |
++--------+-----------------+---------------------------------------------------------+
+
+.. code-block:: json
+    :caption: Response
+
+    {
+        "timestamp": "2024-09-24 12:27:04",
+        "version": "1.3",
+        "type": "success",
+        "data": {
+            "uuid": "3524139b-20c7-4cda-8860-8ede3f79306d",
+            "prompt": "Entered prompt",
+            "status": "new",
+            "purchaseStatus": "deferred",
+            "items": [
+                {
+                    "uuid": "328f2aa8-6e7f-4c65-8761-91f9110e80c0",
+                    "dpItemId": null,
+                    "previewUrl": null
+                },
+                {
+                    "uuid": "b9cd71f9-89c1-4311-929d-211d567a9352",
+                    "dpItemId": null,
+                    "previewUrl": null
+                },
+                {
+                    "uuid": "610811f8-ab8c-4a08-a284-885d5675b449",
+                    "dpItemId": null,
+                    "previewUrl": null
+                },
+                {
+                    "uuid": "e1410eb7-3279-4962-8a04-1bbda618919c",
+                    "dpItemId": null,
+                    "previewUrl": null
+                }
+            ]
+        }
+    }
+
+
+imageGenerator.get
+^^^^^^^^^^^^^^^^^^
+Retrieves the status and details of a generated image using its unique prompt UUID.
+If successful, the data will show
+::
+    data["status"]: "completed"
+    data["purchaseStatus"]: "paid"
+    data["items"][]["dpItemId"]: not null
+
+The command response may change during processing. In the first step of processing, it will contain the value of the ``previewUrl`` field and will not contain the ``dpItemId``. Later, the ``dpItemId`` value will appear.
+
+You can preview the generated image via the ``previewUrl`` field and license it using the ``dpItemId``
+
+It is important to note that the content at the ``previewUrl`` link will only be temporarily available.
+
+For licensing, simply use the `licenseItem`_ command.
+
+Request
+
++--------+---------------+-----------------------------------------------------+
+| string | dp_command    | Command name 'imageGenerator.get'                   |
++--------+---------------+-----------------------------------------------------+
+| string | dp_apikey     | API key                                             |
++--------+---------------+-----------------------------------------------------+
+| string | dp_session_id | Session ID                                          |
++--------+---------------+-----------------------------------------------------+
+| string | dp_uuid       | Prompt uuid received from `imageGenerator.generate`_ |
++--------+---------------+-----------------------------------------------------+
+
+.. code-block:: json
+    :caption: Response
+
+    {
+        "timestamp": "2024-09-24 12:29:04",
+        "version": "1.3",
+        "type": "success",
+        "data": {
+            "uuid": "3524139b-20c7-4cda-8860-8ede3f79306d",
+            "prompt": "Entered prompt",
+            "status": "completed",
+            "purchaseStatus": "paid",
+            "items": [
+                {
+                    "uuid": "328f2aa8-6e7f-4c65-8761-91f9110e80c0",
+                    "dpItemId": 123456781,
+                    "previewUrl": "https://st5.depositphotos.com/secure/234567/123456781/staff_1024.jpg?md5=90dddd3a1e0fa045badd591af255b60c"
+                },
+                {
+                    "uuid": "b9cd71f9-89c1-4311-929d-211d567a9352",
+                    "dpItemId": 123456782,
+                    "previewUrl": "https://st5.depositphotos.com/secure/234567/123456782/staff_1024.jpg?md5=0919446ec73f95992aa1417e591dc186"
+                },
+                {
+                    "uuid": "610811f8-ab8c-4a08-a284-885d5675b449",
+                    "dpItemId": 123456783,
+                    "previewUrl": "https://st5.depositphotos.com/secure/234567/123456783/staff_1024.jpg?md5=6dbf4e6f0f8cc0292254fcbc0a1113af"
+                },
+                {
+                    "uuid": "ce735bf2-9c19-492a-816c-19a63833ceaf",
+                    "dpItemId": 123456784,
+                    "previewUrl": "https://st5.depositphotos.com/secure/234567/123456784/staff_1024.jpg?md5=fef0e146e16663aa72023d36ec33bd64"
+                }
+            ]
+        }
+    }
+
+imageGenerator.getMediaData
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+After the entire generation process is completed, the command allows you to get the data of each generated item separately using its uuid.
+
+Request
+
++---------+---------------+-----------------------------------------------------+
+| string  | dp_command    |                                                     |
++---------+---------------+-----------------------------------------------------+
+| string  | dp_apikey     | API key                                             |
++---------+---------------+-----------------------------------------------------+
+| string  | dp_session_id | Session ID                                          |
++---------+---------------+-----------------------------------------------------+
+|| string || dp_uuid      || Generated file uuid recived from                   |
+||        ||              || `imageGenerator.generate`_ data["items"][]["uuid"] |
++---------+---------------+-----------------------------------------------------+
+
+.. code-block:: json
+    :caption: Response
+
+    {
+        "timestamp": "2024-09-24 12:29:34",
+        "version": "1.3",
+        "type": "success",
+        "data": {
+            "id": 123456781,
+            "height": 2048,
+            "width": 2048,
+            "type": "i",
+            "aiGenerated": true,
+            ....
+        }
+}
+
 Licensing of files
 ------------------
 
