@@ -640,17 +640,21 @@ Initiates the image generation process based on the input request. If a callback
 
 Request
 
-+--------+-----------------+---------------------------------------------------------+
-| string | dp_command      | Command name 'imageGenerator.generate'                  |
-+--------+-----------------+---------------------------------------------------------+
-| string | dp_apikey       | API key                                                 |
-+--------+-----------------+---------------------------------------------------------+
-| string | dp_session_id   | Session ID                                              |
-+--------+-----------------+---------------------------------------------------------+
-| string | dp_prompt       | The prompt for image generation. Maximum length is 400  |
-+--------+-----------------+---------------------------------------------------------+
-| string | dp_callback_url | Optional. Callback URL where the results will be sent   |
-+--------+-----------------+---------------------------------------------------------+
++--------+-----------------+--------------------------------------------------------------------+
+| string | dp_command      | Command name 'imageGenerator.generate'                             |
++--------+-----------------+--------------------------------------------------------------------+
+| string | dp_apikey       | API key                                                            |
++--------+-----------------+--------------------------------------------------------------------+
+| string | dp_session_id   | Session ID                                                         |
++--------+-----------------+--------------------------------------------------------------------+
+| string | dp_prompt       | The prompt for image generation. Maximum length is 400             |
++--------+-----------------+--------------------------------------------------------------------+
+| string | dp_callback_url | Optional. Callback URL where the results will be sent              |
++--------+-----------------+--------------------------------------------------------------------+
+| string | dp_aspect_ratio | Optional. The aspect ratio of the image ["1:1"|"3:4"|"4:3"|"16:9"] |
++--------+-----------------+--------------------------------------------------------------------+
+| string | dp_medium       | Optional. Medium of the generated images. ["art"|"photography"]    |
++--------+-----------------+--------------------------------------------------------------------+
 
 .. code-block:: json
     :caption: Response
@@ -763,7 +767,7 @@ After the entire generation process is completed, the command allows you to get 
 Request
 
 +---------+---------------+-----------------------------------------------------+
-| string  | dp_command    |                                                     |
+| string  | dp_command    | Command name 'imageGenerator.getMediaData'          |
 +---------+---------------+-----------------------------------------------------+
 | string  | dp_apikey     | API key                                             |
 +---------+---------------+-----------------------------------------------------+
