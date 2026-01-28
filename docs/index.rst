@@ -269,7 +269,7 @@ search
 Content search
 The method is designed to search content files by given parameters.
 
-Required at least one of 'dp_search_query', 'dp_search_categories', 'dp_search_user', 'dp_search_username' parameters.
+Required at least one of 'dp_search_query', 'dp_search_user', 'dp_search_username' parameters.
 
 Request
 
@@ -294,9 +294,6 @@ Request
 +---------+---------------------------+---------------------------------------------------------+
 | string  | dp_search_offset          || Optional. Default is 0. An offset for the first result |
 |         |                           || to return, after sorting the found set.                |
-+---------+---------------------------+---------------------------------------------------------+
-| string  | dp_search_categories      || Optional. Space-delimited list of category identifiers |
-|         |                           || to search for (e.g. '34 35 23')                        |
 +---------+---------------------------+---------------------------------------------------------+
 | int     | dp_search_color           || Optional. Search by the dominant color of the image.   |
 |         |                           || Available colors in table below.                       |
