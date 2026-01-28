@@ -506,10 +506,206 @@ List of languages:
         },
         ....
         ],
-        "count":13009933,         
-        "hash": 1z4ep6,           
-        "type": "success"         
+        "count":13009933,
+        "hash": 1z4ep6,
+        "type": "success"
     }
+
+
+getMediaData
+^^^^^^^^^^^^
+
+Retrieve all information about the media item.
+
+Request
+
++---------+----------------------+------------------------------------------------------------------+
+| string  | dp_command           || Command name 'getMediaData'                                     |
++---------+----------------------+------------------------------------------------------------------+
+| string  | dp_apikey            || Client API key                                                  |
++---------+----------------------+------------------------------------------------------------------+
+| int     | dp_media_id          || ID of requested item. Can be integer (for single item)          |
+| | array |                      || or array for several.                                           |
++---------+----------------------+------------------------------------------------------------------+
+| bool    | dp_full_similar      || Optional. Default is false. If false, search returns array      |
+|         |                      || of ID similar, series. If true, search returns array of         |
+|         |                      || objects {id: similar_id, thumbnail: link on similar thumbnail}. |
++---------+----------------------+------------------------------------------------------------------+
+| string  | dp_domain            || Optional. Default is 'depositphotos.com'. Domain name of        |
+|         |                      || any available CDN server (e.g. imgcontent.net).                 |
++---------+----------------------+------------------------------------------------------------------+
+| string  | dp_datetime_format   || Optional. Default is 'datetime'. Determines output format       |
+|         |                      || for date. Values: 'date', 'datetime', 'unix'.                   |
+|         |                      || 'date' => 'Apr. 18, 2019'                                       |
+|         |                      || 'datetime' => 'Apr. 18, 2019 14:54:25'                          |
+|         |                      || 'unix' => '1408443174' (Seconds since Unix Epoch)               |
++---------+----------------------+------------------------------------------------------------------+
+| bool    | dp_translate_items   || Optional. Default is false. If true, title, description,        |
+|         |                      || categories will be translated (if translation exists) to        |
+|         |                      || language dp_lang. Tags will be translated if only single        |
+|         |                      || item is requested.                                              |
++---------+----------------------+------------------------------------------------------------------+
+| string  | dp_country_excluded  || Optional. Apply country restrictions. For example, with         |
+|         |                      || dp_country_excluded=cn items forbidden in China will not        |
+|         |                      || be returned. Values match the Available languages abbrev.       |
++---------+----------------------+------------------------------------------------------------------+
+| string  | dp_lang              || Optional. Language for translation ('de', 'ru', 'fr', 'sp',     |
+|         |                      || 'zh' (for chinese) etc.)                                        |
++---------+----------------------+------------------------------------------------------------------+
+| int     | dp_search_layout     || Optional. Default is 0. If 1, results returned in same          |
+|         |                      || format as search.                                               |
++---------+----------------------+------------------------------------------------------------------+
+
+Response
+::
+
+    {
+        "timestamp": "2020-03-13 06:49:19",  // Current date and time in YYYY-MM-DD HH:MI:SS format
+        "version": "1.3",                    // API version
+        "type": "success",                   // The query result type
+        "title": "Gorgeous brunette woman.", // Item title
+        "description": "Portrait of elegantly dressed young gorgeous brunette woman.",  // Item description
+        "width": "2584",                     // Width of the original media
+        "height": "3000",                    // Height of the original media
+        "mp": "7.75",                        // Original resolution in megapixels
+        "status": "active",
+        "views": 17225,                      // Number of views for current item
+        "downloads": 1269,                   // Number of downloads for current item
+        "categories": {                      // Categories the current item available in
+            "10": "Beauty & Fashion",        // Result format is {category_id: category_name}
+            "29": "People"
+        },
+        "published": "Jan.31, 2013 15:29:17",  // Datetime of item publication
+        "username": "envivo",                // Author of current item
+        "level": "silver",                   // Current image author level
+        "sizes": {                           // Array of sizes available for current item
+            "s": {
+                "width": 431,
+                "height": 500,
+                "credits": 1,                // Media price with discount
+                "subscription": 1,           // Available by subscription
+                "imagepack": 0,              // Available by imagepack
+                "ondemand": 1,
+                "mp": 0.5
+            },
+            "m": {
+                "width": 861,
+                "height": 1000,
+                "credits": 3,
+                "subscription": 1,
+                "imagepack": 0,
+                "ondemand": 1,
+                "mp": 2
+            },
+            "l": {
+                "width": 1723,
+                "height": 2000,
+                "credits": 6,
+                "subscription": 1,
+                "imagepack": 0,
+                "ondemand": 1,
+                "mp": 8
+            },
+            "xl": {
+                "width": 2584,
+                "height": 3000,
+                "credits": 10,
+                "subscription": 1,
+                "imagepack": 0,
+                "ondemand": 1,
+                "mp": 15
+            },
+            "el0": {
+                "width": 2584,
+                "height": 3000,
+                "credits": 80,
+                "subscription": 0,
+                "imagepack": 0,
+                "ondemand": 1
+            }
+        },
+        "upload_timestamp": "1359471261",
+        "id": "19478735",                    // Item ID
+        "userid": 1345889,                   // Item author ID
+        "user_id": 1345889,
+        "blocked": false,
+        "updated": "Jul.08, 2019 13:11:49",
+        "isextended": true,                  // If false, the item cannot be sold with an extended license
+        "isexclusive": false,                // Whether item is exclusive
+        "nudity": false,
+        "iseditorial": false,                // Whether item can be sold only for editorial use
+        "is_editorial": "no",
+        "isFreeItem": false,
+        "is_mobile": "no",
+        "itype": "image",                    // Media type (image, vector, video)
+        "original_filesize": "3675812",      // File size of original file in bytes
+        "original_extension": "jpg",         // Extension of original file
+        "thumbnail": "https://st.depositphotos.com/.../thumb_110.jpg",
+        "thumb": "https://st.depositphotos.com/.../thumb_110.jpg",       // Link to small item preview
+        "thumb_large": "https://st.depositphotos.com/.../thumb_170.jpg",
+        "thumb_huge": "https://st.depositphotos.com/.../thumb_450.jpg",  // Link to huge item preview
+        "thumb_max": "https://st.depositphotos.com/.../woman.jpg",
+        "medium_thumbnail": "https://st.depositphotos.com/.../thumb_170.jpg",  // Link to medium item preview
+        "large_thumb": "https://st.depositphotos.com/.../woman.jpg",     // Link to large item preview
+        "url_big": "https://st.depositphotos.com/.../woman.jpg",
+        "url_max_qa": "https://st.depositphotos.com/.../thumb_450.jpg",
+        "thumb_170": "https://st.depositphotos.com/.../woman.jpg",
+        "huge_thumb": "https://st.depositphotos.com/.../woman.jpg",
+        "url": "https://st.depositphotos.com/.../thumb_110.jpg",         // Link to big item preview with Depositphotos watermark
+        "url2": "https://st.depositphotos.com/.../thumb_450.jpg",        // Link to big item preview with neutral watermark
+        "itemurl": "https://depositphotos.com/.../woman.html",           // Link to item on Depositphotos
+        "lightfield": false,
+        "avatar": "https://st.depositphotos.com/.../avatar.jpg",         // Author photo link
+        "tags": [                            // Array of tags associated with media
+            "fun",
+            "blue",
+            "beautiful",
+            "happy",
+            "business",
+            "person",
+            "girl",
+            "female",
+            "young",
+            "smiling",
+            "people",
+            "women",
+            "cheerful",
+            "portrait",
+            "cute",
+            "smile",
+            "brunette",
+            "pretty",
+            "woman",
+            "attractive",
+            "gorgeous"
+        ],
+        "available_sizes": {                 // Array of sizes available for current item
+            "s": 1,                          // Result format is {size_name: item_price_in_credits}
+            "m": 3,
+            "l": 6,
+            "xl": 10,
+            "el0": 80
+        },
+        "similar": [                         // Similar items IDs
+            157798924,
+            117883264,
+            173483706,
+            133222882
+        ],
+        "same_model": [                      // Same model items IDs
+            20192481,
+            18186253,
+            24131271,
+            19374401
+        ],
+        "series": [                          // Same series items IDs
+            14784249,
+            20192371,
+            20192481,
+            21262963
+        ]
+    }
+
 
 Complimentary downloads
 -----------------------
