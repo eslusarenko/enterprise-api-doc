@@ -229,10 +229,10 @@ Request
             "firstName": "Steave"
             "lastName": "Rivera"
             "city": "Futufal"
-            "avatarBig":"https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
+            "avatarBig":"https://static.depo.../storage/avatars/1369/1307/p_13607.jpg?15139"
             "avatarSmall":"https://static.depos.../storage/avatars/1369/13607/m_1607.jpg?15246139"
             "occupation": "Futufal"
-            "avatar": "https://static.depо.../storage/avatars/1369/1307/p_13607.jpg?15139"
+            "avatar": "https://static.depo.../storage/avatars/1369/1307/p_13607.jpg?15139"
             "userId": "13692607"
             "address": "537 Pezis Center"
             "email": "test3@depositphotos.com"
@@ -312,7 +312,8 @@ Request
 | string  | dp_search_imagesize       || Optional. Search by the image size. Sets minimum image |
 |         |                           || size. 's' or 'm' or 'l' or 'xl'                        |
 +---------+---------------------------+---------------------------------------------------------+
-| string  | dp_exclude_keyword        || Optional. Comma-separated words to exclude.            |
+| string  | dp_exclude_keywords       || Optional. Keywords to exclude, comma or space          |
+|         |                           || separated.                                             |
 +---------+---------------------------+---------------------------------------------------------+
 | bool    | dp_search_photo           || Optional. Default is true. If true, the search results |
 |         |                           || will include JPEG images. If false - exclude.          |
@@ -383,6 +384,70 @@ Request
 |         |                           || "enterprise" - Curated Collection or                   |
 |         |                           || "premium" - Focused Collection                         |
 +---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_audio           || Optional. Default is false. If true, the search        |
+|         |                           || results include audio of both kinds, music and sound   |
+|         |                           || effects.                                               |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_music           || Optional. If true, the search results include audio,   |
+|         |                           || narrowed to music.                                     |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_sound_effect    || Optional. If true, the search results include audio,   |
+|         |                           || narrowed to sound effects.                             |
++---------+---------------------------+---------------------------------------------------------+
+| string  | dp_search_audio_type      || Optional. 'music' or 'sound_effect'. An equivalent of  |
+|         |                           || the two parameters above: it both includes audio and   |
+|         |                           || narrows it to that kind.                               |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_resolution      || Optional. Minimum video resolution. 0 - all (default), |
+|         |                           || 1 - 720p, 2 - 1080p, 3 - 4K. Conditional, see the note |
+|         |                           || below the table.                                       |
++---------+---------------------------+---------------------------------------------------------+
+| number  | dp_search_length_start    || Optional. Minimum length in seconds, for video and     |
+|         |                           || audio. Fractional values are accepted.                 |
++---------+---------------------------+---------------------------------------------------------+
+| number  | dp_search_length_end      || Optional. Maximum length in seconds, for video and     |
+|         |                           || audio. Fractional values are accepted.                 |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_slow_motion     || Optional. Pass true to restrict the results to slow    |
+|         |                           || motion videos. Omit it for no restriction.             |
++---------+---------------------------+---------------------------------------------------------+
+| bool    | dp_search_time_lapse      || Optional. Pass true to restrict the results to time    |
+|         |                           || lapse videos. Omit it for no restriction.              |
++---------+---------------------------+---------------------------------------------------------+
+| int|arr | dp_search_genre           || Optional. Music genre id, or an array of ids, from     |
+|         |                           || dp_command=audio.genres.getList                        |
++---------+---------------------------+---------------------------------------------------------+
+| int|arr | dp_search_mood            || Optional. Mood id, or an array of ids, from            |
+|         |                           || dp_command=audio.moods.getList                         |
++---------+---------------------------+---------------------------------------------------------+
+| int|arr | dp_search_instrument      || Optional. Instrument id, or an array of ids, from      |
+|         |                           || dp_command=audio.instruments.getList                   |
++---------+---------------------------+---------------------------------------------------------+
+| int|arr | dp_search_sfx_type        || Optional. Sound effect type id, or an array of ids,    |
+|         |                           || from dp_command=audio.soundEffects.getList             |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_bpm_start       || Optional. Minimum tempo in beats per minute.           |
++---------+---------------------------+---------------------------------------------------------+
+| int     | dp_search_bpm_end         || Optional. Maximum tempo in beats per minute.           |
++---------+---------------------------+---------------------------------------------------------+
+
+Video and audio filters are conditional:
+
+* the audio filters ``dp_search_genre``, ``dp_search_mood``,
+  ``dp_search_instrument``, ``dp_search_sfx_type``, ``dp_search_bpm_start`` and
+  ``dp_search_bpm_end`` are applied only when the search includes audio. Any one of
+  ``dp_search_audio``, ``dp_search_music``, ``dp_search_sound_effect`` and
+  ``dp_search_audio_type`` puts it there, so none of them is a prerequisite for the
+  others;
+* ``dp_search_length_start`` and ``dp_search_length_end`` are applied only when
+  ``dp_search_audio`` or ``dp_search_video`` is true;
+* ``dp_search_resolution`` is applied only on a search that includes video and
+  excludes both images and vectors. Because ``dp_search_photo`` and
+  ``dp_search_vector`` default to true, that means sending ``dp_search_video=true``
+  together with ``dp_search_photo=false`` and ``dp_search_vector=false``;
+* ``dp_search_width``, ``dp_search_height``, ``dp_search_max_width`` and
+  ``dp_search_max_height`` are the mirror image of that rule: they are applied only on
+  a search that does not include video, and are ignored entirely once it does.
 
 List of colors:
 
@@ -707,6 +772,107 @@ Response
     }
 
 
+Audio taxonomies
+----------------
+
+Audio search is filtered by ids, not by names. These four methods return the id
+lists used by ``dp_search_genre``, ``dp_search_mood``, ``dp_search_instrument`` and
+``dp_search_sfx_type``. All four take the same single parameter and answer in the
+same shape.
+
+audio.genres.getList
+^^^^^^^^^^^^^^^^^^^^
+
+Returns all music genres with their ids.
+
+Request
+
++---------+---------------+-----------------------------------------------------+
+| string  | dp_command    | Command name 'audio.genres.getList'                 |
++---------+---------------+-----------------------------------------------------+
+| string  | dp_apikey     | API key                                             |
++---------+---------------+-----------------------------------------------------+
+
+.. code-block:: json
+    :caption: Response
+
+    {
+        "timestamp": "2020-03-13 06:49:19",
+        "version": "1.3",
+        "type": "success",
+        "result": true,
+        "data": [
+            {"id": 2, "name": "Alternative & Punk", "alias": "alternative-and-punk"},
+            {"id": 4, "name": "Ambient", "alias": "ambient"},
+            {"id": 6, "name": "Kids", "alias": "kids"}
+        ]
+    }
+
+audio.moods.getList
+^^^^^^^^^^^^^^^^^^^
+
+Returns all music moods with their ids. Same request shape as
+``audio.genres.getList``; the objects in ``data`` carry ``id`` and ``name``.
+
+.. code-block:: json
+    :caption: Response
+
+    {
+        "timestamp": "2020-03-13 06:49:19",
+        "version": "1.3",
+        "type": "success",
+        "result": true,
+        "data": [
+            {"id": 2, "name": "Angry"},
+            {"id": 4, "name": "Bright"},
+            {"id": 6, "name": "Calm"}
+        ]
+    }
+
+audio.instruments.getList
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns all instruments with their ids. Same request shape as
+``audio.genres.getList``; the objects in ``data`` carry ``id`` and ``name``.
+
+.. code-block:: json
+    :caption: Response
+
+    {
+        "timestamp": "2020-03-13 06:49:19",
+        "version": "1.3",
+        "type": "success",
+        "result": true,
+        "data": [
+            {"id": 2, "name": "Brass"},
+            {"id": 4, "name": "Guitar"},
+            {"id": 6, "name": "Bass"}
+        ]
+    }
+
+audio.soundEffects.getList
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns all sound effect types with their ids. Same request shape as
+``audio.genres.getList``; the objects in ``data`` carry ``id``, ``name`` and
+``alias``.
+
+.. code-block:: json
+    :caption: Response
+
+    {
+        "timestamp": "2020-03-13 06:49:19",
+        "version": "1.3",
+        "type": "success",
+        "result": true,
+        "data": [
+            {"id": 4, "name": "Ambience", "alias": "ambience"},
+            {"id": 6, "name": "Animal", "alias": "animal"},
+            {"id": 8, "name": "Cartoon Sound Effect", "alias": "cartoon"}
+        ]
+    }
+
+
 Complimentary downloads
 -----------------------
 
@@ -729,14 +895,26 @@ Request
 +---------+------------------+----------------------------------------------------------------+
 | int     | dp_item_id       | The identifier of the item                                     |
 +---------+------------------+----------------------------------------------------------------+
-| int     | dp_option        | The size of file. "s-2015", "m-2015", "l-2015", etc            |          
+| string  | dp_option        | The size of file. Not required for audio items                 |
 +---------+------------------+----------------------------------------------------------------+
 
-``dp_option`` parameter varies based on collections and downloaded content:
+``dp_option`` names the size you want. A complimentary download licenses nothing and is
+not checked against any license; for ``licenseItem``, take the id from the ``sizes`` of
+the license you chose in ``getLicenseOfGroup``. Each license offers its own subset of
+the shared vocabulary:
 
-* for main collection: "s-2015", "m-2015", "l-2015", "xl-2015", "vect"                                             
-* for premium collection: "cs", "сl", "xl-2015"             
-* for video files: "240", "480", "720", "1080", "4k" 
+* images and vectors, Social Media / Publishing / Digital / Enterprise License:
+  ``s-2015``, ``m-2015``, ``l-2015``, ``xl-2015``, ``vect``, ``ds``
+* images and vectors, Focused (premium) collection: ``cs``, ``cl`` for the Standard
+  License, ``xl-2015`` for the Enhanced License
+* video, Media / Publishing / Digital / Enterprise License: ``smallweb`` (SD 240p),
+  ``bigweb`` (SD 480p), ``hd720`` (HD 720p), ``hd1080`` (HD 1080p), ``4k`` (4K)
+* audio: ``audio`` for the Standard Audio License, ``audio-el`` for the Extended one
+* AI generated images: ``s-2015``, ``m-2015``, ``l-2015``, ``xl-2015``, ``ds``
+
+The two Focused-collection licenses reach ``getLicenseOfGroup`` only for a group on the
+premium license model with the Premium collection enabled; ``xl-2015`` stays available
+through the standard set regardless.
 
 .. code-block:: json
     :caption: Response
@@ -893,6 +1071,7 @@ imageGenerator.get
 Retrieves the status and details of a generated image using its unique prompt UUID.
 If successful, the data will show
 ::
+
     data["status"]: "completed"
     data["purchaseStatus"]: "paid"
     data["items"][]["dpItemId"]: not null
@@ -967,8 +1146,9 @@ Request
 +---------+---------------+-----------------------------------------------------+
 | string  | dp_session_id | Session ID                                          |
 +---------+---------------+-----------------------------------------------------+
-|| string || dp_uuid      || Generated file uuid recived from                   |
-||        ||              || `imageGenerator.generate`_ data["items"][]["uuid"] |
+| string  | dp_uuid       | Generated file uuid: `imageGenerator.generate`_     |
+|         |               | ``data["items"][]["uuid"]``. The prompt uuid        |
+|         |               | ``data["uuid"]`` belongs to `imageGenerator.get`_.  |
 +---------+---------------+-----------------------------------------------------+
 
 .. code-block:: json
@@ -986,7 +1166,7 @@ Request
             "aiGenerated": true,
             ....
         }
-}
+    }
 
 Licensing of files
 ------------------
@@ -1069,14 +1249,32 @@ Request
 +---------+-------------------+----------------------------------------------------------------+
 
 Parameters ``dp_project``,  ``dp_client``, ``dp_purchase_order``, ``dp_isbn``, ``dp_other``  are non-mandatory. These parameters are set up by the manager and are used for convenience.
-``dp_licensing`` parameter must contain an object with the following data:
+``dp_licensing`` parameter must contain an object with the following data, or an
+array of such objects to license several files in one call:
 ::
+
     {
         "dp_item_id": 12345678,
         "dp_license_id": 10123,
         "dp_option": "s-2015",
         "dp_ext_options": 27
     }
+
+``dp_license_id`` is a license id from ``getLicenseOfGroup``, and ``dp_option`` is
+one of the size ids that method returns for that license. The size vocabulary is
+listed in full under `complimentaryDownload`_.
+
+``dp_item_id`` accepts a single id or an array of ids, so one object in
+``dp_licensing`` can cover several files that share the same license and size.
+
+**A batch can partially succeed.** By default a file that cannot be licensed does not
+fail the call: the response still carries ``status: success``, and each entry of
+``result`` is keyed by item id and holds either ``result: "success"`` with its
+transactions and ``downloadLink``, or ``result: "error"`` with ``errors`` carrying
+``error_message`` and ``error_code``. Inspect every entry rather than the overall
+status. Pass the optional ``dp_strict`` (bool, default false) to get the opposite
+behaviour: one bad file then fails the whole request with an error code and nothing is
+licensed.
 
 ``dp_ext_options`` parameter contains integer with a bit mask for additional options:
 
@@ -1147,8 +1345,12 @@ Request
 +---------+---------------+----------------------------------------------------------------+
 | string  | dp_session_id || Session key                                                   |
 +---------+---------------+----------------------------------------------------------------+
-| string  | dp_type       || Optional. Type of licenses. ["paid"|"uninvoiced"|"invoiced"]. |
+| string  | dp_type       || Optional. Type of licenses. ["paid"|"uninvoiced"|             |
+|         |               || "uninvoicedAll"|"invoiced"|"paidUninvoiced"|"paidInvoiced"].  |
 |         |               || Default - all types                                           |
++---------+---------------+----------------------------------------------------------------+
+| str|arr | dp_item_type  || Optional. Type of licensed item, or an array of types:        |
+|         |               || "image", "vector", "video", "audio". Default - all item types |
 +---------+---------------+----------------------------------------------------------------+
 | string  | dp_date_start || Optional. Start date when items were licensed                 |
 +---------+---------------+----------------------------------------------------------------+
@@ -1160,6 +1362,18 @@ Request
 +---------+---------------+----------------------------------------------------------------+
 | int     | dp_limit      || Optional. Limit for display invoices per page                 |
 +---------+---------------+----------------------------------------------------------------+
+
+``dp_type`` filters on two independent things at once, whether the transaction is paid
+and whether it has been invoiced:
+
+* ``paid`` - paid, invoiced or not
+* ``uninvoiced`` - unpaid and not invoiced
+* ``uninvoicedAll`` - not invoiced, paid or not
+* ``invoiced`` - unpaid and invoiced
+* ``paidUninvoiced`` - paid and not invoiced
+* ``paidInvoiced`` - paid and invoiced
+
+Omit it to get every state.
 
 .. code-block:: json
     :caption: Response
@@ -1306,6 +1520,7 @@ Request
 One of ``dp_item_transaction_id`` or ``dp_item_transaction_ids`` should be passed.
 ``dp_from`` and ``dp_to`` data should be object, that can contain following keys:
 ::
+
     {
         "company":..., 
         "fullName":...,
@@ -1355,10 +1570,16 @@ Request
 +--------+---------------+------------------------------------------------------------------+
 | int    | dp_user_id    || Optional. User identity filter                                  |
 +--------+---------------+------------------------------------------------------------------+
-| string | dp_type       || Optional. Type of licenses.                                     |
-|        |               || Can be "paid" or "uninvoiced" or "invoiced".Default - all types |
+| string | dp_type       || Optional. Type of licenses. Can be "paid", "uninvoiced",        |
+|        |               || "uninvoicedAll", "invoiced", "paidUninvoiced" or                |
+|        |               || "paidInvoiced". Default - all types                             |
++--------+---------------+------------------------------------------------------------------+
+| str|arr| dp_item_type  || Optional. Type of licensed item, or an array of types: "image", |
+|        |               || "vector", "video", "audio". Default - all item types            |
 +--------+---------------+------------------------------------------------------------------+
 
+
+``dp_type`` takes the same six values as `getLicensedItems`_, with the same meanings.
 
 .. code-block:: json
     :caption: Response
